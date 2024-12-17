@@ -12,96 +12,76 @@
             background-color: #f4f4f9;
             color: #333;
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .video-section {
-            display: flex;
-            flex-direction: row;
             justify-content: center;
             align-items: flex-start;
-            width: 100%;
-            max-width: 1200px;
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
-        .main-video {
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            max-width: 1200px;
+            gap: 20px;
+        }
+
+        .main-video-section {
             flex: 2;
             display: flex;
             flex-direction: column;
-            margin-right: 20px;
+            gap: 20px;
         }
 
         .video-container {
-            width: 100%;
             background-color: #fff;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            margin-bottom: 20px;
+        }
+
+        .pricelist {
+            display: flex;
+            justify-content: space-around;
+            background-color: #fff;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+
+        .price-item {
+            text-align: center;
+        }
+
+        .price-label {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .price-value {
+            color: #cc0000;
+            font-weight: bold;
+            font-size: 1.2em;
         }
 
         video {
             width: 100%;
-            height: auto;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .video-details {
-            padding: 15px;
-        }
-
-        .video-title {
-            font-size: 1.7em;
-            margin-bottom: 10px;
-            color: #222;
-            font-weight: bold;
-        }
-
-        .video-description {
-            font-size: 1em;
-            margin-top: 10px;
-            color: #555;
-            line-height: 1.6;
-        }
-
-        .video-actions {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 15px;
-        }
-
-        .video-actions button {
-            background-color: #cc0000;
-            color: #fff;
-            border: none;
-            padding: 10px 40px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-            transition: background-color 0.3s ease;
-        }
-
-        .video-actions button:hover {
-            background-color: #a30000;
+            display: block;
         }
 
         .suggestions {
-            width: 100%;
             background-color: #fff;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             padding: 15px;
-            margin-top: 20px;
         }
 
         .suggestion {
             display: flex;
             align-items: center;
             margin-bottom: 10px;
-            overflow: hidden;
         }
 
         .suggestion img {
@@ -117,15 +97,9 @@
         }
 
         .suggestion-title {
-            font-size: 1em;
-            color: #333;
-            margin-bottom: 5px;
             font-weight: bold;
-        }
-
-        .suggestion-title:hover {
-            text-decoration: underline;
-            cursor: pointer;
+            font-size: 1em;
+            margin-bottom: 5px;
         }
 
         .suggestion-meta {
@@ -135,56 +109,61 @@
 
         .sidebar {
             flex: 1;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 15px;
             display: flex;
             flex-direction: column;
-            max-width: 400px;
+            justify-content: space-between;
+        }
+
+        .video-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #222;
+        }
+
+        .video-description {
+            font-size: 1em;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .video-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .video-actions button {
+            background-color: #cc0000;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .video-actions button:hover {
+            background-color: #a30000;
         }
 
         .credits {
-            font-size: 0.9em;
-            color: #888;
-            margin-top: 20px;
             text-align: center;
-        }
-
-        .pricelist {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            background-color: #fff;
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-            border-top-left-radius: 12px;
-            border-top-right-radius: 12px;
-            font-size: 1em;
-            font-weight: bold;
-            color: #333;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .price-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .price-label {
-            color: #666;
+            color: #888;
             font-size: 0.9em;
-            margin-bottom: 5px;
-        }
-
-        .price-value {
-            color: #cc0000;
-            font-size: 1.2em;
-            font-weight: bold;
+            margin-top: 20px;
         }
     </style>
 </head>
 
 <body>
-    <div class="video-section">
-        <div class="main-video">
+    <div class="container">
+        <!-- Video Section -->
+        <div class="main-video-section">
             <div class="video-container">
                 <div class="pricelist">
                     <div class="price-item">
@@ -205,6 +184,8 @@
                     Your browser does not support the video tag.
                 </video>
             </div>
+
+            <!-- Suggestions -->
             <div class="suggestions">
                 <div class="suggestion">
                     <img src="https://via.placeholder.com/120x80" alt="Thumbnail">
@@ -220,38 +201,32 @@
                         <div class="suggestion-meta">800K views • 1 week ago</div>
                     </div>
                 </div>
-                <div class="suggestion">
-                    <img src="https://via.placeholder.com/120x80" alt="Thumbnail">
-                    <div class="suggestion-details">
-                        <div class="suggestion-title">Suggested Video 3</div>
-                        <div class="suggestion-meta">500K views • 2 weeks ago</div>
-                    </div>
-                </div>
-                <div class="suggestion">
-                    <img src="https://via.placeholder.com/120x80" alt="Thumbnail">
-                    <div class="suggestion-details">
-                        <div class="suggestion-title">Suggested Video 4</div>
-                        <div class="suggestion-meta">300K views • 1 month ago</div>
-                    </div>
-                </div>
             </div>
         </div>
 
+        <!-- Sidebar -->
         <div class="sidebar">
-            <div class="video-details">
+            <div>
                 <div class="video-title">Example Video Title</div>
-                <div class="video-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus luctus
-                    urna sed urna ultricies ac tempor dui sagittis. In condimentum facilisis porta. Curabitur blandit
-                    tempus porttitor. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</div>
-                <div class="video-actions">
-                    <button>Purchase</button>
-                    <button>Add To Wishlist</button>
+                <div class="video-description">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus luctus urna sed urna ultricies ac
+                    tempor dui sagittis.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus luctus urna sed urna ultricies ac
+                    tempor dui sagittis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus luctus urna sed urna ultricies ac
+                    tempor dui sagittis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus luctus urna sed urna ultricies ac
+                    tempor dui sagittis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus luctus urna sed urna ultricies ac
+                    tempor dui sagittis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus luctus urna sed urna ultricies ac
+                    tempor dui sagittis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus luctus urna sed urna ultricies ac
+                    tempor dui sagittis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus luctus urna sed urna ultricies ac
+                    tempor dui sagittis.
                 </div>
+            </div>
+            <div class="video-actions">
+                <button>Purchase</button>
+                <button>Add To Wishlist</button>
             </div>
         </div>
     </div>
 
-    <p class="credits">Powered by Laravel</p>
 </body>
 
 </html>
