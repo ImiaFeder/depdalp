@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Seeders;
+use Illuminate\Support\Facades\Hash;
 
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -13,11 +14,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // Admin
+        User::create([
+            'name' => 'Admin User',
+            'email' => 'admin@example.com',
+            'password' => Hash::make('password'), // Ganti dengan password Anda
+            'isAdmin' => true,
+        ]);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        // User Biasa
+        User::create([
+            'name' => 'Regular User',
+            'email' => 'user@example.com',
+            'password' => Hash::make('password'), // Ganti dengan password Anda
+            'isAdmin' => false,
         ]);
     }
 }
