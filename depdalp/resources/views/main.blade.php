@@ -1,28 +1,73 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Website</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100">
-    <!-- Navbar -->
-    <nav class="bg-blue-600 text-white p-4">
-        <div class="container mx-auto flex justify-between">
-            <div class="text-lg font-bold">Simple Website</div>
-            <ul class="flex space-x-4">
-                <li><a href="/home" class="hover:underline">Home</a></li>
-                <li><a href="/userPage" class="hover:underline">User</a></li>
-                <li><a href="/adminPage" class="hover:underline">Admin</a></li>
-            </ul>
-        </div>
-    </nav>
+@extends('layouts.template')
 
-    <!-- Home Page -->
-    <div class="container mx-auto mt-10">
-        <h1 class="text-3xl font-bold text-center">Welcome to the Home Page</h1>
-        <p class="text-center mt-4">This is a simple website built with Tailwind CSS.</p>
+@section('content')
+<div class="container">
+    <!-- Genre Hobi Section -->
+    <div class="row mb-8">
+        <div class="col-12">
+            <h2 class="text-2xl font-semibold mb-4">Explore Hobby Genres</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                <!-- Genre 1 -->
+                <a href="/genre/1" class="bg-blue-500 text-white p-6 rounded-lg shadow-lg hover:bg-blue-400">
+                    <h3 class="text-lg font-bold">3D Modelling</h3>
+                </a>
+                <!-- Genre 2 -->
+                <a href="/genre/2" class="bg-green-500 text-white p-6 rounded-lg shadow-lg hover:bg-green-400">
+                    <h3 class="text-lg font-bold">Photography</h3>
+                </a>
+                <!-- Genre 3 -->
+                <a href="/genre/3" class="bg-yellow-500 text-white p-6 rounded-lg shadow-lg hover:bg-yellow-400">
+                    <h3 class="text-lg font-bold">Audiophile</h3>
+                </a>
+                <!-- Genre 4 -->
+                <a href="/genre/4" class="bg-red-500 text-white p-6 rounded-lg shadow-lg hover:bg-red-400">
+                    <h3 class="text-lg font-bold">Gym</h3>
+                </a>
+                <!-- Genre 5 -->
+                <a href="/genre/5" class="bg-purple-500 text-white p-6 rounded-lg shadow-lg hover:bg-purple-400">
+                    <h3 class="text-lg font-bold">Social Media</h3>
+                </a>
+            </div>
+        </div>
     </div>
-</body>
-</html>
+
+    <!-- Featured Videos Section -->
+    <div class="row">
+        <div class="col-12">
+            <h2 class="text-2xl font-semibold mb-4">Featured Videos</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                <!-- Video 1 -->
+                <div class="bg-gray-200 p-4 rounded-lg shadow-lg">
+                    <div class="h-48 bg-gray-300 rounded-lg mb-4"></div> <!-- Placeholder for video thumbnail -->
+                    <h3 class="text-lg font-bold">Video Title 1</h3>
+                    <p class="text-sm text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+                <!-- Video 2 -->
+                <div class="bg-gray-200 p-4 rounded-lg shadow-lg">
+                    <div class="h-48 bg-gray-300 rounded-lg mb-4"></div> <!-- Placeholder for video thumbnail -->
+                    <h3 class="text-lg font-bold">Video Title 2</h3>
+                    <p class="text-sm text-gray-600">Phasellus iaculis lorem ac nisi pellentesque, eget volutpat velit malesuada.</p>
+                </div>
+                <!-- Video 3 -->
+                <div class="bg-gray-200 p-4 rounded-lg shadow-lg">
+                    <div class="h-48 bg-gray-300 rounded-lg mb-4"></div> <!-- Placeholder for video thumbnail -->
+                    <h3 class="text-lg font-bold">Video Title 3</h3>
+                    <p class="text-sm text-gray-600">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                </div>
+                <!-- Video 4 -->
+                <div class="bg-gray-200 p-4 rounded-lg shadow-lg">
+                    <div class="h-48 bg-gray-300 rounded-lg mb-4"></div> <!-- Placeholder for video thumbnail -->
+                    <h3 class="text-lg font-bold">Video Title 4</h3>
+                    <p class="text-sm text-gray-600">Donec varius augue quis augue fringilla, et convallis sapien consequat.</p>
+                </div>
+                <!-- Video 5 -->
+                <div class="bg-gray-200 p-4 rounded-lg shadow-lg">
+                    <div class="h-48 bg-gray-300 rounded-lg mb-4"></div> <!-- Placeholder for video thumbnail -->
+                    <h3 class="text-lg font-bold">Video Title 5</h3>
+                    <p class="text-sm text-gray-600">Fusce vehicula neque at turpis sodales, ac iaculis neque condimentum.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
