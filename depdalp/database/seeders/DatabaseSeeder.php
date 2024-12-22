@@ -9,6 +9,7 @@ use App\Models\video;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\genre;
+use App\Models\user_video;
 
 class DatabaseSeeder extends Seeder
 {
@@ -63,14 +64,29 @@ class DatabaseSeeder extends Seeder
             ['title' => 'Fitness and Gym Nutrition Guide', 'description' => 'Nutrition tips to help you get the best results from your gym routine.', 'price' => 21.00, 'path' => 'path/to/video20'],
         ];
 
+       
+
         foreach ($videos as $video) {
             Video::create($video);
         }
+
+        user_video::create([
+            'user_id' => 1,
+            'video_id' => 1
+        ]);
+
+        user_video::create([
+            'user_id' => 1,
+            'video_id' => 2
+        ]);
 
         $this-> call(
             [
                 GenreVideoSeeder::class
             ]
             );
+
+
+        
     }
 }

@@ -2,6 +2,9 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Models\genre;
+use App\Http\Controllers\VideoController;
+use App\Http\Controllers\UserVideoController;
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
 Route::get('/', function () {
@@ -14,20 +17,14 @@ Route::middleware(['admin'])->group(function () {
     });
 });
 
-// Route lainnya
-Route::get('/video', function () {
-    return view('video');
-});
+Route::get('/video/{id}', [VideoController::class, 'show']);
+
 
 Route::get('/home', function () {
     return view('main');
 })->name('home');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/userPage', function () {
-        return view('userpage');
-    });
-});
+Route::middleware('auth')->get('/userPage', [UserVideoController::class, 'userPage']);
 
 Route::get('/index', function () {
     return view('home');

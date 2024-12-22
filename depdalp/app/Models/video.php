@@ -16,4 +16,9 @@ class video extends Model
     {
         return $this->hasMany(genre_video::class);
     }
+
+    public function userVideos()
+    {
+        return $this->hasMany(user_video::class);
+    }
 }
