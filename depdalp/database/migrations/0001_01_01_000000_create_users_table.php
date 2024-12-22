@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('isAdmin')->default(false); // Tambahkan kolom isAdmin
+            $table->integer('token')->default(10);
             $table->rememberToken();
             $table->timestamps();
         });
