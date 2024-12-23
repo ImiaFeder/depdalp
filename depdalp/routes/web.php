@@ -44,8 +44,14 @@ Route::get('/genre/{gr}', function ($gr) {
     });
 
     // Kembalikan tampilan dengan data genre dan videos
-    return view('videospage', compact('genre', 'videos'));
+    return view('genrepage', compact('genre', 'videos'));
 });
 
+
+Route::post('/process-topup', [VideoController::class, 'processTopUp']);
+
+
+
+Route::post('/purchase-video', [VideoController::class, 'purchaseVideo'])->middleware('auth');
 
 Auth::routes();

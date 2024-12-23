@@ -24,7 +24,7 @@ class UserVideoController extends Controller
             return $userVideo->video; // Accessing the related 'video' for each user_video
         });
 
-        return view('userpage', compact('user', 'videos')); // Pass th
+        return view('userPage', compact('user', 'videos')); 
     }
     /**
      * Display a listing of the resource.
