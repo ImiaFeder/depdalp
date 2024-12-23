@@ -50,7 +50,8 @@ Route::get('/genre/{gr}', function ($gr) {
 
 Route::post('/process-topup', [VideoController::class, 'processTopUp']);
 
-
+Route::get('/upload-video', [VideoController::class, 'create'])->name('video.create');
+Route::post('/upload-video', [VideoController::class, 'store'])->name('video.store');
 
 Route::post('/purchase-video', [VideoController::class, 'purchaseVideo'])->middleware('auth');
 

@@ -137,17 +137,46 @@ class VideoController extends Controller
      */
     public function create()
     {
-        //
+        return view('upload');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StorevideoRequest $request)
+    // Proses penyimpanan video
+    public function store(Request $request)
     {
-        //
+        // Validasi input
+        $request->validate([
+            'video' => 'required|mimetypes:video/mp4|max:102400', // Hanya menerima MP4, max 100MB
+        ]);
+    
+        if ($request->hasFile('video')) {
+            // Nama file asli
+            $filename = $request->file('video')->getClientOriginalName();
+    
+            // Path tujuan di public/videos
+            $destinationPath = public_path('storage/videos');
+    
+            // Buat folder jika belum ada
+            if (!file_exists($destinationPath)) {
+                mkdir($destinationPath, 0777, true);
+            }
+    
+            // Pindahkan file ke folder tujuan
+            $request->file('video')->move($destinationPath, $filename);
+    
+            // Set session flash message
+            session()->flash('success', 'Video uploaded successfully!');
+    
+            return redirect()->back(); // Kembali ke halaman sebelumnya
+        }
+    
+        // Jika tidak ada file, tampilkan pesan error
+        session()->flash('error', 'No video file found in the request.');
+        return redirect()->back();
     }
+    
+    
 
+   
     /**
      * Display the specified resource.
      */
