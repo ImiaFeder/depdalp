@@ -2,6 +2,27 @@
 
 @section('content')
 <div class="container">
+    <!-- Search Bar Section -->
+    <div class="row mb-6">
+        <div class="col-12">
+            <h2 class="text-2xl font-semibold mb-4">Search Hobbies and Videos</h2>
+            <form method="GET">
+                {{-- action="{{ route('search') }}"  --}}
+                <div class="flex">
+                    <input
+                        type="text"
+                        name="query"
+                        class="form-input px-4 py-2 w-full rounded-lg shadow-md"
+                        placeholder="Search hobbies or videos..."
+                    />
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg ml-2 hover:bg-blue-400">
+                        Search
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- Genre Hobi Section -->
     <div class="row mb-8">
         <div class="col-12">
