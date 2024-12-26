@@ -10,7 +10,7 @@ class video extends Model
     /** @use HasFactory<\Database\Factories\VideoFactory> */
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'price', 'path'];
+    protected $fillable = ['title', 'description', 'price', 'path','pending'];
 
     public function genres()
     {

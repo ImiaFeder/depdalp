@@ -89,6 +89,7 @@
         </div>
     </div>
 
+    @auth
     <!-- Popup Modal -->
     <div id="popup" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
         <div class="w-full max-w-md bg-white p-6 rounded-lg shadow-lg text-center">
@@ -137,6 +138,9 @@
             </div>
         </div>
     </div>
+
+    @endauth
+
     
 <!-- Top-Up Modal -->
 <div id="topupPopup" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
@@ -250,127 +254,8 @@
 </body>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const topupPopup = document.getElementById('topupPopup');
-        const topupOptions = document.querySelectorAll('.topupOption');
-        const creditCardForm = document.getElementById('creditCardForm');
-        const closeTopup = document.getElementById('closeTopup');
-        const confirmTopup = document.getElementById('confirmTopup');
-        let selectedAmount = 0;
-
-        // Manual buttons
-        const btn15 = document.getElementById('btn15');
-        const btn30 = document.getElementById('btn30');
-        const btn50 = document.getElementById('btn50');
-        const btn100 = document.getElementById('btn100');
-        const btn200 = document.getElementById('btn200');
-        const btn500 = document.getElementById('btn500');
-
-        // All buttons array for easy reset
-        const allButtons = [btn15, btn30, btn50, btn100, btn200, btn500];
-
-        // Function to reset all buttons
-        const resetButtons = () => {
-            allButtons.forEach(btn => {
-                btn.classList.remove('bg-orange-500', 'text-white');
-                btn.classList.add('bg-gray-100', 'text-gray-800');
-            });
-        };
-
-        // Add event listeners for each button
-        btn15.addEventListener('click', () => {
-            resetButtons();
-            btn15.classList.add('bg-orange-500', 'text-white');
-            selectedAmount = 15;
-            creditCardForm.classList.remove('hidden');
-        });
-
-        btn30.addEventListener('click', () => {
-            resetButtons();
-            btn30.classList.add('bg-orange-500', 'text-white');
-            selectedAmount = 30;
-            creditCardForm.classList.remove('hidden');
-        });
-
-        btn50.addEventListener('click', () => {
-            resetButtons();
-            btn50.classList.add('bg-orange-500', 'text-white');
-            selectedAmount = 50;
-            creditCardForm.classList.remove('hidden');
-        });
-
-        btn100.addEventListener('click', () => {
-            resetButtons();
-            btn100.classList.add('bg-orange-500', 'text-white');
-            selectedAmount = 100;
-            creditCardForm.classList.remove('hidden');
-        });
-
-        btn200.addEventListener('click', () => {
-            resetButtons();
-            btn200.classList.add('bg-orange-500', 'text-white');
-            selectedAmount = 200;
-            creditCardForm.classList.remove('hidden');
-        });
-
-        btn500.addEventListener('click', () => {
-            resetButtons();
-            btn500.classList.add('bg-orange-500', 'text-white');
-            selectedAmount = 500;
-            creditCardForm.classList.remove('hidden');
-        });
-
-        // Close Top-Up Modal
-        closeTopup.addEventListener('click', () => {
-            topupPopup.classList.add('hidden');
-            creditCardForm.classList.add('hidden'); // Hide credit card form
-        });
-
-        // Confirm Top-Up
-        confirmTopup.addEventListener('click', () => {
-            const cardNumber = document.getElementById('cardNumber').value;
-            const expiryDate = document.getElementById('expiryDate').value;
-            const cvv = document.getElementById('cvv').value;
-
-            if (!selectedAmount) {
-                alert("Please select a top-up amount.");
-                return;
-            }
-
-            if (!cardNumber || !expiryDate || !cvv) {
-                alert("Please fill in all credit card details.");
-                return;
-            }
-
-            // Submit top-up details
-            fetch('/process-topup', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                },
-                body: JSON.stringify({
-                    amount: selectedAmount,
-                    cardNumber: cardNumber,
-                    expiryDate: expiryDate,
-                    cvv: cvv
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert(`Top-up of ${selectedAmount} tokens successful!`);
-                    location.reload(); // Reload the page to reflect new balance
-                } else {
-                    alert(data.error || "Failed to process top-up.");
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('An error occurred while processing your request.');
-            });
-        });
-    });
+   
+     
 </script>
 
 

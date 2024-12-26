@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Models\genre;
@@ -12,9 +13,12 @@ Route::get('/', function () {
 });
 
 Route::middleware(['admin'])->group(function () {
-    Route::get('/adminPage', function () {
-        return view('adminpage');
-    });
+    Route::get('/adminPage', [VideoController::class, 'index'])->name('admin.index');
+
+    Route::get('/admin/videos/{id}', [VideoController::class, 'inspect'])->name('admin.inspect');
+
+    Route::patch('/admin/approve/{id}', [VideoController::class, 'approve'])->name('admin.approve');
+    Route::delete('/admin/delete/{id}', [VideoController::class, 'destroy'])->name('admin.delete');
 });
 
 Route::get('/video/{id}', [VideoController::class, 'show']);
@@ -41,7 +45,10 @@ Route::get('/genre/{gr}', function ($gr) {
     // Ambil video-video yang terkait dengan genre ini melalui genre_video
     $videos = $genre->videos->map(function ($genreVideo) {
         return $genreVideo->video; // Mengambil video terkait dengan genre melalui genre_video
+    })->filter(function ($video) {
+        return !$video->pending; // Hilangkan video dengan pending = true
     });
+
 
     // Kembalikan tampilan dengan data genre dan videos
     return view('genrepage', compact('genre', 'videos'));

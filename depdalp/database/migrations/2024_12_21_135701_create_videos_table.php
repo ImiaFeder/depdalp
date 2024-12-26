@@ -17,6 +17,8 @@ return new class extends Migration
             $table->text('description');
             $table->decimal('price', 8, 2); // Harga video
             $table->string('path'); // Path video
+            $table->boolean('pending')->default(false); // Path video
+
             $table->timestamps();
         });
     }

@@ -96,7 +96,7 @@
     <div id="topupPopup" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
         <div class="w-full max-w-lg bg-white p-6 rounded-lg shadow-lg text-center">
             <!-- Title -->
-            <p class="text-xl text-gray-800 mb-6">Not Enough Tokens</p>
+            <p class="text-xl text-gray-800 mb-6">Get More Tokens</p>
             <p class="text-gray-600 mb-4">Choose an amount to top up:</p>
     
           <!-- Top-Up Options Grid -->

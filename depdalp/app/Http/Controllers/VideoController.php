@@ -17,13 +17,27 @@ use Illuminate\Http\Request;
 class VideoController extends Controller
 {
 
+    public function inspect($id)
+{
+    // Cari video berdasarkan ID
+    $video = Video::find($id);
+
+    // Jika video tidak ditemukan, tampilkan 404
+    if (!$video) {
+        abort(404, 'Video not found');
+    }
+
+    // Kirim data video ke view
+    return view('inspect', compact('video'));
+}
+
     public function show($id)
     {
         // Ambil video berdasarkan ID
         $video = Video::find($id);
 
         // If the video is not found, show a 404 page
-        if (!$video) {
+        if (!$video || $video->pending) {
             abort(404, 'Video not found');
         }
 
@@ -127,17 +141,25 @@ class VideoController extends Controller
     /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
-        //
+        // Ambil semua video dengan pending = 1
+        $pendingVideos = video::where('pending', true)->get();
+    
+        // Kirim data ke view
+        return view('adminpage', compact('pendingVideos'));
     }
-
+    
     /**
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        return view('upload');
+    {   
+
+        $genres = \App\Models\genre::all();
+
+        return view('upload', compact('genres'));
     }
 
     // Proses penyimpanan video
@@ -145,31 +167,38 @@ class VideoController extends Controller
     {
         // Validasi input
         $request->validate([
-            'video' => 'required|mimetypes:video/mp4|max:102400', // Hanya menerima MP4, max 100MB
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'price' => 'required|numeric|min:0',
+            'genre_id' => 'required|exists:genres,id',
+            'video' => 'required|mimetypes:video/mp4|max:102400',
         ]);
     
         if ($request->hasFile('video')) {
-            // Nama file asli
+            // Unggah file video
             $filename = $request->file('video')->getClientOriginalName();
+            $destinationPath = 'videos';
+            $filePath = $request->file('video')->storeAs($destinationPath, $filename, 'public');
     
-            // Path tujuan di public/videos
-            $destinationPath = public_path('storage/videos');
+            // Buat video baru
+            $video = Video::create([
+                'title' => $request->title,
+                'description' => $request->description,
+                'price' => $request->price,
+                'path' => $filePath,
+                'pending' => 1,
+            ]);
     
-            // Buat folder jika belum ada
-            if (!file_exists($destinationPath)) {
-                mkdir($destinationPath, 0777, true);
-            }
+            // Buat hubungan dengan genre
+            \App\Models\genre_video::create([
+                'video_id' => $video->id,
+                'genre_id' => $request->genre_id,
+            ]);
     
-            // Pindahkan file ke folder tujuan
-            $request->file('video')->move($destinationPath, $filename);
-    
-            // Set session flash message
-            session()->flash('success', 'Video uploaded successfully!');
-    
-            return redirect()->back(); // Kembali ke halaman sebelumnya
+            session()->flash('success', 'Video uploaded and associated with genre successfully!');
+            return redirect()->back();
         }
     
-        // Jika tidak ada file, tampilkan pesan error
         session()->flash('error', 'No video file found in the request.');
         return redirect()->back();
     }
@@ -198,11 +227,22 @@ class VideoController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(video $video)
+    public function approve($id)
     {
-        //
+        $video = Video::findOrFail($id);
+        $video->pending = false;
+        $video->save();
+    
+        return redirect()->route('admin.index')->with('success', 'Video approved successfully.');
     }
+    
+    public function destroy($id)
+    {
+        $video = Video::findOrFail($id);
+        $video->delete();
+    
+        return redirect()->route('admin.index')->with('success', 'Video deleted successfully.');
+    }
+    
+ 
 }
