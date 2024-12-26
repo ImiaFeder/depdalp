@@ -52,43 +52,25 @@
         </div>
     </div>
 
-    <!-- Featured Videos Section -->
-    <div class="row">
-        <div class="col-12">
-            <h2 class="text-2xl font-semibold mb-4">Featured Videos</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                <!-- Video 1 -->
-                <div class="bg-gray-200 p-4 rounded-lg shadow-lg">
-                    <div class="h-48 bg-gray-300 rounded-lg mb-4"></div> <!-- Placeholder for video thumbnail -->
-                    <h3 class="text-lg font-bold">Video Title 1</h3>
-                    <p class="text-sm text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </div>
-                <!-- Video 2 -->
-                <div class="bg-gray-200 p-4 rounded-lg shadow-lg">
-                    <div class="h-48 bg-gray-300 rounded-lg mb-4"></div> <!-- Placeholder for video thumbnail -->
-                    <h3 class="text-lg font-bold">Video Title 2</h3>
-                    <p class="text-sm text-gray-600">Phasellus iaculis lorem ac nisi pellentesque, eget volutpat velit malesuada.</p>
-                </div>
-                <!-- Video 3 -->
-                <div class="bg-gray-200 p-4 rounded-lg shadow-lg">
-                    <div class="h-48 bg-gray-300 rounded-lg mb-4"></div> <!-- Placeholder for video thumbnail -->
-                    <h3 class="text-lg font-bold">Video Title 3</h3>
-                    <p class="text-sm text-gray-600">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                </div>
-                <!-- Video 4 -->
-                <div class="bg-gray-200 p-4 rounded-lg shadow-lg">
-                    <div class="h-48 bg-gray-300 rounded-lg mb-4"></div> <!-- Placeholder for video thumbnail -->
-                    <h3 class="text-lg font-bold">Video Title 4</h3>
-                    <p class="text-sm text-gray-600">Donec varius augue quis augue fringilla, et convallis sapien consequat.</p>
-                </div>
-                <!-- Video 5 -->
-                <div class="bg-gray-200 p-4 rounded-lg shadow-lg">
-                    <div class="h-48 bg-gray-300 rounded-lg mb-4"></div> <!-- Placeholder for video thumbnail -->
-                    <h3 class="text-lg font-bold">Video Title 5</h3>
-                    <p class="text-sm text-gray-600">Fusce vehicula neque at turpis sodales, ac iaculis neque condimentum.</p>
-                </div>
-            </div>
+ 
+<div class="row">
+    <div class="col-12">
+        <h2 class="text-2xl font-semibold mb-4">Featured Videos</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            @foreach ($featuredVideos as $video)
+                <a href="/video/{{ $video->id}}" class="bg-gray-200 p-4 rounded-lg shadow-lg hover:bg-gray-300 transition">
+                    <div class="h-48 bg-gray-300 rounded-lg mb-4">
+                        <img src="{{ asset('storage/thumbnail1.png') }}" alt="{{ $video->title }}" class="w-full h-full object-cover rounded-lg">
+                    </div>
+                    <h3 class="text-lg font-bold">{{ $video->title }}</h3>
+                    <p class="text-sm text-gray-600">{{ $video->description }}</p>
+                </a>
+            @endforeach
         </div>
     </div>
+</div>
+
+
+
 </div>
 @endsection

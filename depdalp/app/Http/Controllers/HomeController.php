@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Video;
 
 class HomeController extends Controller
 {
@@ -22,7 +23,11 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
-        return view('home');
+    {   
+
+        $featuredVideos = video::inRandomOrder()->take(9)->get();
+
+        // Return the view with the videos
+        return view('main',compact('featuredVideos'));
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Models\genre;
@@ -24,9 +25,7 @@ Route::middleware(['admin'])->group(function () {
 Route::get('/video/{id}', [VideoController::class, 'show']);
 
 
-Route::get('/home', function () {
-    return view('main');
-})->name('home');
+Route::get('/home', [HomeController::class,'index']);
 
 Route::middleware('auth')->get('/userPage', [UserVideoController::class, 'userPage']);
 
