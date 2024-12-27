@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\user_video;
+use App\Models\video;
+
 use App\Models\User;
 
 use App\Http\Requests\Storeuser_videoRequest;
@@ -30,8 +32,12 @@ class UserVideoController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        //
+    {   
+
+        $featuredVideos = video::inRandomOrder()->take(9)->get();
+
+        // Return the view with the videos
+        return view('main',compact('featuredVideos'));
     }
 
     /**

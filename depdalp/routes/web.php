@@ -8,24 +8,23 @@ use App\Http\Controllers\VideoController;
 use App\Http\Controllers\UserVideoController;
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
+Route::get('/home', [App\Http\Controllers\UserVideoController::class, 'index']);
 Route::get('/', function () {
     return view('home');
 });
 
 Route::middleware(['admin'])->group(function () {
-    Route::get('/adminPage', [VideoController::class, 'index'])->name('admin.index');
 
     Route::get('/admin/videos/{id}', [VideoController::class, 'inspect'])->name('admin.inspect');
 
     Route::patch('/admin/approve/{id}', [VideoController::class, 'approve'])->name('admin.approve');
     Route::delete('/admin/delete/{id}', [VideoController::class, 'destroy'])->name('admin.delete');
 });
+Route::get('/adminPage', [VideoController::class, 'index'])->name('admin.index')->middleware('auth');
 
 Route::get('/video/{id}', [VideoController::class, 'show']);
 
 
-Route::get('/home', [HomeController::class,'index']);
 
 Route::middleware('auth')->get('/userPage', [UserVideoController::class, 'userPage']);
 

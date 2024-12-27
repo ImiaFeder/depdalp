@@ -36,7 +36,14 @@
         <ul class="flex space-x-6">
             <li><a href="{{ url('/home') }}" class="hover:text-yellow-400 transition duration-300 ease-in-out">Home</a></li>
             <li><a href="{{ url('/userPage') }}" class="hover:text-yellow-400 transition duration-300 ease-in-out">User</a></li>
-            <li><a href="{{ url('/adminPage') }}" class="hover:text-yellow-400 transition duration-300 ease-in-out">Admin</a></li>
+            @auth
+                @if(Auth::user()->isAdmin)
+                    <li><a href="{{ url('/adminPage') }}" class="hover:text-yellow-400 transition duration-300 ease-in-out">Admin</a></li>
+                @endif
+                @if(Auth::user()->isCreator)
+                    <li><a href="{{ url('/upload-video') }}" class="hover:text-yellow-400 transition duration-300 ease-in-out">Upload</a></li>
+                @endif
+            @endauth
         </ul>
         <!-- Right Side Of Navbar -->
         <div class="ml-auto relative flex items-center">

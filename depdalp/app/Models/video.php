@@ -10,7 +10,7 @@ class video extends Model
     /** @use HasFactory<\Database\Factories\VideoFactory> */
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'price', 'path','pending'];
+    protected $fillable = ['title', 'description', 'price', 'path','pending','user_id'];
 
     public function genres()
     {
@@ -20,5 +20,10 @@ class video extends Model
     public function userVideos()
     {
         return $this->hasMany(user_video::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

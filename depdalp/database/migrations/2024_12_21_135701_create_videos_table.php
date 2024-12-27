@@ -15,13 +15,18 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->decimal('price', 8, 2); // Harga video
+            $table->integer('price'); // Harga video (integer)
             $table->string('path'); // Path video
-            $table->boolean('pending')->default(false); // Path video
-
-            $table->timestamps();
+            $table->boolean('pending')->default(false); // Pending status
+            $table->unsignedBigInteger('user_id')->default(1); // User ID
+            
+            // Foreign key constraint
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            
+            $table->timestamps(); // Created and updated timestamps
         });
     }
+    
 
     public function down()
     {

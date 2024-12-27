@@ -142,14 +142,20 @@ class VideoController extends Controller
      * Display a listing of the resource.
      */
 
-    public function index()
-    {
-        // Ambil semua video dengan pending = 1
-        $pendingVideos = video::where('pending', true)->get();
-    
-        // Kirim data ke view
-        return view('adminpage', compact('pendingVideos'));
-    }
+     public function index()
+     {   
+         // Periksa apakah pengguna adalah admin
+         if (!Auth::user()->isAdmin) {
+             abort(404); // Kembalikan halaman "Not Found"
+         }
+ 
+         // Ambil semua video dengan pending = 1
+         $pendingVideos = video::where('pending', true)->get();
+     
+         // Kirim data ke view
+         return view('adminpage', compact('pendingVideos'));
+     }
+ 
     
     /**
      * Show the form for creating a new resource.
