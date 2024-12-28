@@ -1,7 +1,7 @@
 @extends('layouts.template')
 
 @section('content')
-<body class="bg-gray-100">
+<body class="bg-blue-100">
 
     <!-- Full Page Container -->
     <div class="flex items-center justify-center h-screen bg-gradient-to-r from-red-500 to-black">
@@ -34,5 +34,5 @@
         </div>
     </div>
 
-    </body>
+</body>
 @endsection

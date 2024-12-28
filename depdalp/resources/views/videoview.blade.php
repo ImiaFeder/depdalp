@@ -21,7 +21,7 @@
                         <div class="absolute inset-0 bg-gray-300 opacity-90 flex justify-center items-center z-10">
                             <div class="w-full max-w-md bg-white p-6 rounded-lg shadow-lg text-center">
                                 <p class="text-xl text-gray-800 mb-4">Unlock this video</p>
-                                
+
                                 <!-- Price and Coin -->
                                 <div class="flex items-center justify-center bg-white p-4 rounded-lg shadow-md mb-6">
                                     <div class="w-8 h-8 bg-orange-500 text-white rounded-full flex items-center justify-center mr-3">
@@ -31,8 +31,8 @@
                                 </div>
 
                                 <!-- Buy Button -->
-                                <button 
-                                    id="buyNow" 
+                                <button
+                                    id="buyNow"
                                     class="bg-orange-500 text-white py-3 px-8 rounded-lg hover:bg-orange-600 transition duration-300 transform hover:scale-105 w-full">
                                     Buy Now
                                 </button>
@@ -46,8 +46,8 @@
                         <div class="text-center">
                             <p class="text-white text-xl"></p>
                             <a href="{{ route('login') }}" class="bg-blue-600 text-white py-3 px-6 rounded-lg mt-4 hover:bg-blue-700 transition">Login</a>
-                            <p class="text-white mt-2">or</p>
-                            <a href="{{ route('register') }}" class="bg-green-600 text-white py-3 px-6 rounded-lg mt-2 hover:bg-green-700 transition">Register</a>
+                            <p class="text-white mt-6 mb-6">or</p> <!-- Menambahkan margin-top lebih besar -->
+                            <a href="{{ route('register') }}" class="bg-green-600 text-white py-3 px-6 rounded-lg mt-6 hover:bg-green-700 transition">Register</a> <!-- Menambahkan margin-top lebih besar -->
                         </div>
                     </div>
                     <img class="w-full h-full object-cover" src="/storage/novid.jpg" alt="Placeholder">
@@ -58,15 +58,15 @@
             <div class="suggestions bg-white rounded-lg shadow-lg p-4 mt-6">
                 <h3 class="text-xl font-semibold text-gray-800 mb-4">Suggested Videos</h3>
                 @foreach ($suggestedVideos as $suggested)
-                <div class="suggestion flex items-center mb-4">
-                    <img src="{{ $suggested->thumbnail }}" alt="Thumbnail" class="w-30 h-20 object-cover rounded-lg mr-4">
-                    <div class="suggestion-details">
-                        <div class="suggestion-title font-bold text-lg">{{ $suggested->title }}</div>
-                        <div class="suggestion-meta text-sm text-gray-500">
-                            {{ $suggested->views }} views • {{ $suggested->created_at->diffForHumans() }}
+                    <a href="/video/{{ $suggested->id }}" class="suggestion flex items-center mb-4">
+                        <img src="{{ asset('storage/thumbnail1.png') }}" alt="{{ $suggested->title }}" class="w-40 h-20 object-cover rounded-lg mr-4">
+                        <div class="suggestion-details flex-grow">
+                            <div class="suggestion-title font-bold text-lg truncate">{{ $suggested->title }}</div>
+                            <div class="suggestion-meta text-sm text-gray-500">
+                                {{ $suggested->views }} views • {{ $suggested->created_at->diffForHumans() }}
+                            </div>
                         </div>
-                    </div>
-                </div>
+                    </a>
                 @endforeach
             </div>
         </div>
@@ -80,10 +80,10 @@
                     {{ $video->description }}
                 </div>
             </div>
-            
+
             <!-- Video Actions -->
             <div class="video-actions flex justify-between mt-6">
-             
+
                 <button class="bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700 transition">Add To Wishlist</button>
             </div>
         </div>
@@ -95,7 +95,7 @@
         <div class="w-full max-w-md bg-white p-6 rounded-lg shadow-lg text-center">
             <!-- Title -->
             <p class="text-xl text-gray-800 mb-6">Confirm Your Purchase</p>
-    
+
             <!-- Price and Token Details -->
             <div class="bg-gray-100 p-4 rounded-lg shadow-md mb-6">
                 <div class="flex justify-between items-center mb-3">
@@ -126,7 +126,7 @@
                     </div>
                 </div>
             </div>
-    
+
             <!-- Action Buttons -->
             <div class="flex justify-between gap-4">
                 <button id="confirmBuy" class="bg-orange-500 text-white py-2 px-6 rounded-lg hover:bg-orange-600 transition duration-300">
@@ -141,7 +141,7 @@
 
     @endauth
 
-    
+
 <!-- Top-Up Modal -->
 <div id="topupPopup" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
     <div class="w-full max-w-lg bg-white p-6 rounded-lg shadow-lg text-center">
@@ -151,8 +151,8 @@
 
       <!-- Top-Up Options Grid -->
       <div class="grid grid-cols-3 gap-4 mb-6">
-        <button 
-            id="btn15" 
+        <button
+            id="btn15"
             class="topupOption bg-gray-100 border border-orange-500 hover:bg-orange-500 hover:text-white text-gray-800 font-semibold py-3 px-4 rounded-lg flex flex-col items-center transition duration-300">
             <div class="w-6 h-6 bg-orange-500 text-white rounded-full flex items-center justify-center mb-2">
                 <span class="text-xs font-bold">H</span>
@@ -160,8 +160,8 @@
             <span class="text-lg">15</span>
             <span class="text-sm text-gray-500 mt-2">Rp 5,000</span> <!-- Harga -->
         </button>
-        <button 
-            id="btn30" 
+        <button
+            id="btn30"
             class="topupOption bg-gray-100 border border-orange-500 hover:bg-orange-500 hover:text-white text-gray-800 font-semibold py-3 px-4 rounded-lg flex flex-col items-center transition duration-300">
             <div class="w-6 h-6 bg-orange-500 text-white rounded-full flex items-center justify-center mb-2">
                 <span class="text-xs font-bold">H</span>
@@ -169,8 +169,8 @@
             <span class="text-lg">30</span>
             <span class="text-sm text-gray-500 mt-2">Rp 9,000</span> <!-- Harga -->
         </button>
-        <button 
-            id="btn50" 
+        <button
+            id="btn50"
             class="topupOption bg-gray-100 border border-orange-500 hover:bg-orange-500 hover:text-white text-gray-800 font-semibold py-3 px-4 rounded-lg flex flex-col items-center transition duration-300">
             <div class="w-6 h-6 bg-orange-500 text-white rounded-full flex items-center justify-center mb-2">
                 <span class="text-xs font-bold">H</span>
@@ -178,8 +178,8 @@
             <span class="text-lg">50</span>
             <span class="text-sm text-gray-500 mt-2">Rp 12,500</span> <!-- Harga -->
         </button>
-        <button 
-            id="btn100" 
+        <button
+            id="btn100"
             class="topupOption bg-gray-100 border border-orange-500 hover:bg-orange-500 hover:text-white text-gray-800 font-semibold py-3 px-4 rounded-lg flex flex-col items-center transition duration-300">
             <div class="w-6 h-6 bg-orange-500 text-white rounded-full flex items-center justify-center mb-2">
                 <span class="text-xs font-bold">H</span>
@@ -187,8 +187,8 @@
             <span class="text-lg">100</span>
             <span class="text-sm text-gray-500 mt-2">Rp 20,000</span> <!-- Harga -->
         </button>
-        <button 
-            id="btn200" 
+        <button
+            id="btn200"
             class="topupOption bg-gray-100 border border-orange-500 hover:bg-orange-500 hover:text-white text-gray-800 font-semibold py-3 px-4 rounded-lg flex flex-col items-center transition duration-300">
             <div class="w-6 h-6 bg-orange-500 text-white rounded-full flex items-center justify-center mb-2">
                 <span class="text-xs font-bold">H</span>
@@ -196,8 +196,8 @@
             <span class="text-lg">200</span>
             <span class="text-sm text-gray-500 mt-2">Rp 35,000</span> <!-- Harga -->
         </button>
-        <button 
-            id="btn500" 
+        <button
+            id="btn500"
             class="topupOption bg-gray-100 border border-orange-500 hover:bg-orange-500 hover:text-white text-gray-800 font-semibold py-3 px-4 rounded-lg flex flex-col items-center transition duration-300">
             <div class="w-6 h-6 bg-orange-500 text-white rounded-full flex items-center justify-center mb-2">
                 <span class="text-xs font-bold">H</span>
@@ -210,27 +210,27 @@
         <!-- Credit Card Form -->
         <form id="creditCardForm" class="hidden flex flex-col items-start mb-6">
             <label for="cardNumber" class="block text-left text-gray-700 font-semibold mb-2">Card Number</label>
-            <input 
-                id="cardNumber" 
-                type="text" 
-                class="w-full border border-gray-300 rounded-lg py-2 px-4 mb-4 focus:outline-none focus:border-orange-500" 
+            <input
+                id="cardNumber"
+                type="text"
+                class="w-full border border-gray-300 rounded-lg py-2 px-4 mb-4 focus:outline-none focus:border-orange-500"
                 placeholder="1234 5678 9012 3456">
-            
+
             <div class="grid grid-cols-2 gap-4">
                 <div>
                     <label for="expiryDate" class="block text-left text-gray-700 font-semibold mb-2">Expiry Date</label>
-                    <input 
-                        id="expiryDate" 
-                        type="text" 
-                        class="w-full border border-gray-300 rounded-lg py-2 px-4 mb-4 focus:outline-none focus:border-orange-500" 
+                    <input
+                        id="expiryDate"
+                        type="text"
+                        class="w-full border border-gray-300 rounded-lg py-2 px-4 mb-4 focus:outline-none focus:border-orange-500"
                         placeholder="MM/YY">
                 </div>
                 <div>
                     <label for="cvv" class="block text-left text-gray-700 font-semibold mb-2">CVV</label>
-                    <input 
-                        id="cvv" 
-                        type="text" 
-                        class="w-full border border-gray-300 rounded-lg py-2 px-4 mb-4 focus:outline-none focus:border-orange-500" 
+                    <input
+                        id="cvv"
+                        type="text"
+                        class="w-full border border-gray-300 rounded-lg py-2 px-4 mb-4 focus:outline-none focus:border-orange-500"
                         placeholder="123">
                 </div>
             </div>
@@ -238,13 +238,13 @@
 
         <!-- Confirm and Close Buttons -->
         <div class="flex justify-between gap-4">
-            <button 
-                id="confirmTopup" 
+            <button
+                id="confirmTopup"
                 class="bg-orange-500 text-white py-2 px-6 rounded-lg hover:bg-orange-600 transition duration-300">
                 Confirm
             </button>
-            <button 
-                id="closeTopup" 
+            <button
+                id="closeTopup"
                 class="bg-gray-500 text-white py-2 px-6 rounded-lg hover:bg-gray-600 transition duration-300">
                 Close
             </button>
@@ -254,8 +254,8 @@
 </body>
 
 <script>
-   
-     
+
+
 </script>
 
 
@@ -274,7 +274,7 @@
         buyButton.addEventListener('click', () => {
             if (userTokens >= videoPrice) {
                 popup.classList.remove('hidden');
-            } 
+            }
 
             else {
                 topupPopup.classList.remove('hidden');
