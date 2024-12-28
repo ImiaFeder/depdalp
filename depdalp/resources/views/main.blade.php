@@ -6,8 +6,7 @@
     <div class="row mb-6">
         <div class="col-12">
             <h2 class="text-2xl font-semibold mb-4">Search Hobbies and Videos</h2>
-            <form method="GET">
-                {{-- action="{{ route('search') }}"  --}}
+            <form method="GET" action="{{ route('video.search') }}">
                 <div class="flex">
                     <input
                         type="text"
@@ -15,7 +14,7 @@
                         class="form-input px-4 py-2 w-full rounded-lg shadow-md"
                         placeholder="Search hobbies or videos..."
                     />
-                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg ml-2 hover:bg-blue-400">
+                    <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-lg ml-2 hover:bg-blue-400">
                         Search
                     </button>
                 </div>
@@ -52,7 +51,7 @@
         </div>
     </div>
 
- 
+
 <div class="row">
     <div class="col-12">
         <h2 class="text-2xl font-semibold mb-6 text-gray-800">Featured Videos</h2>
@@ -84,7 +83,7 @@
     </div>
 </div>
 
-    
+
 
 
 

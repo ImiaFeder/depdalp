@@ -59,5 +59,6 @@ Route::get('/upload-video', [VideoController::class, 'create'])->name('video.cre
 Route::post('/upload-video', [VideoController::class, 'store'])->name('video.store');
 
 Route::post('/purchase-video', [VideoController::class, 'purchaseVideo'])->middleware('auth');
+Route::get('/search', [VideoController::class, 'search'])->name('video.search');
 
 Auth::routes();

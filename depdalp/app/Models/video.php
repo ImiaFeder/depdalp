@@ -26,4 +26,9 @@ class video extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public static function searchByTitle($query)
+{
+    return self::where('title', 'like', '%' . $query . '%')->get();
+}
 }
