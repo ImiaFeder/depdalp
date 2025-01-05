@@ -13,9 +13,10 @@
                     @if($ownsVideo)
                         <!-- If user owns the video -->
                         <video class="w-full" controls>
-                            <source src="{{ asset('storage/video.mp4'  ) }}" type="video/mp4">
+                            <source src="{{ asset('storage/'.$video->path) }}" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
+                        
                     @else
                         <!-- If user is logged in but doesn't own the video -->
                         <div class="absolute inset-0 bg-gray-300 opacity-90 flex justify-center items-center z-10">
