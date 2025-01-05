@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->boolean('isAdmin')->default(false); // Tambahkan kolom isAdmin
             $table->boolean('isCreator')->default(false); // Tambahkan kolom isAdmin
+            $table->string('profile_picture')->nullable();
 
             $table->integer('token')->default(10);
             $table->rememberToken();

@@ -68,8 +68,17 @@
                 @endif
             @else
                 <!-- Dropdown button for logged-in user -->
-                <button id="userDropdownButton" class="hover:text-yellow-400 focus:outline-none text-lg font-semibold">
-                    {{ Auth::user()->name }}
+                <button id="userDropdownButton" class="hover:text-yellow-400 focus:outline-none text-lg font-semibold flex items-center">
+                    <!-- Tampilkan nama pengguna dengan sedikit margin ke kanan -->
+                    <span class="mr-2">{{ Auth::user()->name }}</span>
+                    <!-- Tampilkan gambar profil jika ada -->
+                    @if(Auth::user()->profile_picture)
+                        <img src="{{ asset('storage/' . Auth::user()->profile_picture) }}" alt="Profile Picture" class="w-8 h-8 rounded-full ml-2">
+                    @else
+                        <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center ml-2">
+                            <span class="text-sm font-bold text-white">{{ substr(Auth::user()->name, 0, 1) }}</span>
+                        </div>
+                    @endif
                 </button>
                 <!-- Dropdown Menu -->
                 <div id="userDropdownMenu" class="hidden absolute right-0 mt-2 w-48 bg-white text-black shadow-lg rounded-lg z-10">

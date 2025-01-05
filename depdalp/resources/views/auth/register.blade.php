@@ -36,11 +36,10 @@
                     <label for="password-confirm" class="text-sm">Confirm Password</label>
                     <input id="password-confirm" type="password" class="w-full p-2 border border-red-300 rounded-md" name="password_confirmation" required autocomplete="new-password">
                 </div>
-
-
-
-
-
+                <div>
+                    <label for="profile_picture">Profile Picture</label>
+                    <input id="profile_picture" type="file" name="profile_picture" accept="image/*">
+                </div>
                 <button type="submit" class="w-full bg-red-500 text-white py-2 rounded-md hover:bg-red-600 transition duration-300 ease-in-out">Register</button>
             </form>
         </div>

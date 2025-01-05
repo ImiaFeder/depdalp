@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Models\genre;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\UserVideoController;
+use App\Http\Controllers\UserProfileController;
 
 
 Route::get('/home', [App\Http\Controllers\UserVideoController::class, 'index']);
@@ -60,5 +61,8 @@ Route::post('/upload-video', [VideoController::class, 'store'])->name('video.sto
 
 Route::post('/purchase-video', [VideoController::class, 'purchaseVideo'])->middleware('auth');
 Route::get('/search', [VideoController::class, 'search'])->name('video.search');
+
+Route::middleware('auth')->get('/profile', [UserProfileController::class, 'show'])->name('profile');
+
 
 Auth::routes();
