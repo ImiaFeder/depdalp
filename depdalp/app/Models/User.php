@@ -23,6 +23,8 @@ class User extends Authenticatable
         'password',
         'token',
         'profile_picture',
+        'background_profile', // Add this line
+        'description', // Add this line
     ];
 
     /**

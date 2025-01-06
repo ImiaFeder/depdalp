@@ -82,10 +82,14 @@
                 </button>
                 <!-- Dropdown Menu -->
                 <div id="userDropdownMenu" class="hidden absolute right-0 mt-2 w-48 bg-white text-black shadow-lg rounded-lg z-10">
+                    <a href="{{ route('profile') }}"
+                       class="block px-4 py-2 hover:bg-gray-200 transition duration-200 ease-in-out">
+                       Profile
+                    </a>
                     <a href="#"
                        class="block px-4 py-2 hover:bg-gray-200 transition duration-200 ease-in-out"
                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        Logout
+                       Logout
                     </a>
                     <!-- Logout Form -->
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
