@@ -14,6 +14,11 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('/join-creator', function () {
+    return view('creator');
+})->middleware('auth');
+
+
 Route::middleware(['admin'])->group(function () {
 
     Route::get('/admin/videos/{id}', [VideoController::class, 'inspect'])->name('admin.inspect');

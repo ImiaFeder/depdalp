@@ -42,8 +42,13 @@
                     <li><a href="{{ url('/adminPage') }}" class="hover:text-yellow-400 transition duration-300 ease-in-out">Admin</a></li>
                 @endif
                 @if(Auth::user()->isCreator)
-                    <li><a href="{{ url('/upload-video') }}" class="hover:text-yellow-400 transition duration-300 ease-in-out">Upload</a></li>
-                @endif
+                <li><a href="{{ url('/upload-video') }}" class="hover:text-yellow-400 transition duration-300 ease-in-out">Upload</a></li>
+            @else
+                <li><a href="{{ url('/join-creator') }}" class="hover:text-yellow-400 transition duration-300 ease-in-out">Join Creators</a></li>
+            @endif
+            
+                
+
             @endauth
         </ul>
         <!-- Right Side Of Navbar -->
