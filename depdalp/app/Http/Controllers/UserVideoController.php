@@ -33,13 +33,16 @@ class UserVideoController extends Controller
      */
     public function index()
     {   
-
-        $featuredVideos = video::inRandomOrder()->take(9)->get();
-
-        // Return the view with the videos
-        return view('main',compact('featuredVideos'));
+        // Ambil video yang tidak memiliki status pending
+        $featuredVideos = \App\Models\Video::where('pending', false)
+                            ->inRandomOrder()
+                            ->take(9)
+                            ->get();
+    
+        // Return view dengan data video
+        return view('main', compact('featuredVideos'));
     }
-
+    
     /**
      * Show the form for creating a new resource.
      */

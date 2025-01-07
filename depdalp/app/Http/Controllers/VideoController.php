@@ -161,12 +161,19 @@ class VideoController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-
-        $genres = \App\Models\genre::all();
-
+    {   
+        // Pengecekan apakah user adalah creator
+        if (!Auth::user()->isCreator) {
+            abort(404); // Menampilkan halaman "Page Not Found"
+        }
+    
+        // Ambil semua genre
+        $genres = \App\Models\Genre::all();
+    
+        // Return view upload dengan data genre
         return view('upload', compact('genres'));
     }
+    
 
     // Proses penyimpanan video
     public function store(Request $request)
@@ -193,6 +200,7 @@ class VideoController extends Controller
                 'price' => $request->price,
                 'path' => $filePath,
                 'pending' => 1,
+                'user_id' => Auth::user()->id
             ]);
 
             // Buat hubungan dengan genre
