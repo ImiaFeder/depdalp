@@ -22,7 +22,7 @@
         });
     </script>
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-100 mb-12">
 
 
 <nav class="bg-gradient-to-r from-red-600 to-black text-white p-4 shadow-lg">
@@ -30,13 +30,13 @@
         <div class="text-lg font-bold flex items-center space-x-2 mr-6">
             <!-- Logo (Image) yang dapat diklik untuk kembali ke halaman utama -->
             <a href="{{ url('/') }}" class="flex items-center space-x-2">
-                <img src="/storage/logo.png" alt="Hobby Sync Logo" class="w-16 h-16 rounded-full shadow-lg">
-                <span class="text-2xl font-semibold tracking-wide">Hobby Sync</span>
+                <img src="/storage/logo.png" alt="Hobby Sync Logo" class="w-16 h-16 rounded-full">
+                <span class="text-2xl font-semibold tracking-wide">HobbySync</span>
             </a>
         </div>
         <ul class="flex space-x-6">
             <li><a href="{{ url('/home') }}" class="hover:text-yellow-400 transition duration-300 ease-in-out">Home</a></li>
-            <li><a href="{{ url('/userPage') }}" class="hover:text-yellow-400 transition duration-300 ease-in-out">User</a></li>
+            {{-- <li><a href="{{ url('/userPage') }}" class="hover:text-yellow-400 transition duration-300 ease-in-out">User</a></li> --}}
             @auth
                 @if(Auth::user()->isAdmin)
                     <li><a href="{{ url('/adminPage') }}" class="hover:text-yellow-400 transition duration-300 ease-in-out">Admin</a></li>
@@ -46,8 +46,8 @@
             @else
                 <li><a href="{{ url('/join-creator') }}" class="hover:text-yellow-400 transition duration-300 ease-in-out">Join Creators</a></li>
             @endif
-            
-                
+
+
 
             @endauth
         </ul>
@@ -221,6 +221,8 @@
     </div>
 
     <script>
+
+
         document.addEventListener('DOMContentLoaded', () => {
             const topupPopup = document.getElementById('topupPopup');
             const topupOptions = document.querySelectorAll('.topupOption');

@@ -15,10 +15,10 @@
             </div>
 
             <!-- App Description -->
-            <h1 class="text-4xl font-semibold leading-tight">
+            <h1 class="text-4xl font-semibold leading-tight hover:text-yellow-400 transition duration-300">
                 Welcome to Hobby Sync Platform!
             </h1>
-            <p class="text-lg mt-4 mb-8">
+            <p class="text-lg mt-4 mb-8 hover:text-yellow-400 transition duration-300">
                 Discover amazing video tutorials for a wide variety of hobbies. Whether you’re into 3D modelling, photography, audiophile content, or fitness, we have everything to take your hobby to the next level.
             </p>
 
@@ -29,7 +29,8 @@
 
             <!-- Secondary Link (optional) -->
             <p class="text-sm mt-4">
-                Already have an account? <a href="/login" class="text-orange-300 hover:text-orange-200">Login here</a>.
+                Already have an account?
+                <a href="/login" class="text-orange-300 hover:text-orange-200 transition duration-300">Login here</a>.
             </p>
         </div>
     </div>

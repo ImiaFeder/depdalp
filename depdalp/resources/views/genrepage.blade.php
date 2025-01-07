@@ -4,8 +4,19 @@
 
 @section('content')
 <div class="container mx-auto mt-10">
-    <h1 class="text-3xl font-semibold text-blue-600 mb-6">Genre: {{ $genre->name }}</h1>
-    
+    <h1 class="text-4xl font-extrabold text-red-600 mb-8 flex items-center">
+        <span class="mr-4 p-2 bg-red-100 text-red-600 rounded-full shadow-md">
+            <!-- Ikon play -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-5.197-3.21A1 1 0 008 8.691v6.618a1 1 0 001.555.832l5.197-3.209a1 1 0 000-1.664z" />
+            </svg>
+        </span>
+        <span class="relative">
+            {{ $genre->name }}
+            <span class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r rounded"></span>
+        </span>
+    </h1>
+
     @if($videos->isEmpty())
         <p class="text-gray-600">No videos available for this genre.</p>
     @else
