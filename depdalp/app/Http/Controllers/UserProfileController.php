@@ -11,13 +11,21 @@ use App\Models\user_video;
 class UserProfileController extends Controller
 {
     public function show()
-    {
-        // Get the currently authenticated user
-        $user = Auth::user();
+{
+    // Get the currently authenticated user
+    $user = Auth::user();
 
-        // Display the user's profile page
-        return view('profile', compact('user'));
-    }
+    // Ambil video yang dimiliki oleh pengguna
+    $userVideos = user_video::where('user_id', $user->id)->get();
+
+    // Mengambil video yang terkait
+    $videos = $userVideos->map(function ($userVideo) {
+        return $userVideo->video;
+    });
+
+    // Kirim data ke view
+    return view('profile', compact('user', 'videos'));
+}
 
     public function update_background(Request $request)
     {
@@ -69,20 +77,4 @@ class UserProfileController extends Controller
 
         return redirect()->back()->with('success', 'Description updated successfully.');
     }
-
-    public function owned_video()
-{
-    $user = Auth::user();
-
-    // Ambil data video yang dimiliki oleh pengguna
-    $userVideos = user_video::where('user_id', $user->id)->get();
-
-    // Mengambil video yang terkait
-    $videos = $userVideos->map(function ($userVideo) {
-        return $userVideo->video;
-    });
-
-    // Kirim data ke view
-    return view('profile', compact('user', 'videos'));
-}
 }

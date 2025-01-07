@@ -42,7 +42,7 @@
                 <p>{{ $user->description }}</p>
                 <!-- Button to open modal for updating or deleting the description -->
                 <button id="openDescriptionModalBtn"
-                    class="text-white bg-red-600 mt-8 px-4 py-2 rounded-md absolute bottom-4 right-4">Edit
+                    class="text-white bg-red-600 mt-8 px-4 py-2 rounded-md absolute bottom-2 right-4">Edit
                     Description</button>
             @else
                 <p class="text-gray-500">No description available.</p>
@@ -110,7 +110,11 @@
         </div>
     </div>
 
-    {{-- <div class="container mx-auto mt-10">
+    <div class="text-center mb-12 mt-12">
+        <h1 class="text-3xl font-bold">Owned Videos</h1>
+    </div>
+
+    <div class="container mx-auto mt-10">
         @if ($videos->isEmpty())
             <p>No videos found.</p>
         @else
@@ -137,7 +141,7 @@
                 @endforeach
             </div>
         @endif
-    </div> --}}
+    </div>
 
     <script>
         // Get the modal and buttons
