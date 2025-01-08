@@ -141,7 +141,17 @@ class VideoController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function station()
+    {
+        // Ambil user ID dari pengguna yang sedang login
+        $userId = Auth::id();
 
+        // Ambil semua video yang diunggah oleh pengguna tersebut
+        $videos = Video::where('user_id', $userId)->get();
+
+        // Return view dengan data video
+        return view('station', compact('videos'));
+    }
     public function index()
     {
         // Periksa apakah pengguna adalah admin
@@ -152,28 +162,32 @@ class VideoController extends Controller
         // Ambil semua video dengan pending = 1
         $pendingVideos = video::where('pending', true)->get();
 
+        // Ambil semua pengguna kecuali admin
+        $users = User::where('isAdmin', false)->get();
+
         // Kirim data ke view
-        return view('adminpage', compact('pendingVideos'));
+        return view('adminpage', compact('pendingVideos', 'users'));
     }
+
 
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
-    {   
+    {
         // Pengecekan apakah user adalah creator
         if (!Auth::user()->isCreator) {
             abort(404); // Menampilkan halaman "Page Not Found"
         }
-    
+
         // Ambil semua genre
         $genres = \App\Models\Genre::all();
-    
+
         // Return view upload dengan data genre
         return view('upload', compact('genres'));
     }
-    
+
 
     // Proses penyimpanan video
     public function store(Request $request)
@@ -259,17 +273,17 @@ class VideoController extends Controller
     }
 
     public function search(Request $request)
-{
-    $query = $request->input('query');
+    {
+        $query = $request->input('query');
 
-    // Jika query kosong atau wildcard, tampilkan semua video
-    if (empty($query) || $query == '*') {
-        $featuredVideos = Video::all(); // Mengambil semua video
-    } else {
-        // Mencari video berdasarkan judul jika query tidak kosong
-        $featuredVideos = Video::where('title', 'like', '%' . $query . '%')->get();
+        // Jika query kosong atau wildcard, tampilkan semua video
+        if (empty($query) || $query == '*') {
+            $featuredVideos = Video::all(); // Mengambil semua video
+        } else {
+            // Mencari video berdasarkan judul jika query tidak kosong
+            $featuredVideos = Video::where('title', 'like', '%' . $query . '%')->get();
+        }
+
+        return view('main', compact('featuredVideos'));
     }
-
-    return view('main', compact('featuredVideos'));
-}
 }

@@ -25,6 +25,8 @@ Route::middleware(['admin'])->group(function () {
 
     Route::patch('/admin/approve/{id}', [VideoController::class, 'approve'])->name('admin.approve');
     Route::delete('/admin/delete/{id}', [VideoController::class, 'destroy'])->name('admin.delete');
+    Route::patch('/make-creator/{id}', [UserVideoController::class, 'makeCreator'])->name('makeCreator');
+
 });
 Route::get('/adminPage', [VideoController::class, 'index'])->name('admin.index')->middleware('auth');
 
@@ -57,6 +59,11 @@ Route::get('/genre/{gr}', function ($gr) {
     // Kembalikan tampilan dengan data genre dan videos
     return view('genrepage', compact('genre', 'videos'));
 });
+
+
+
+Route::get('/station', [VideoController::class, 'station'])->name('station');
+Route::get('/edit-video/{id}', [VideoController::class, 'editVideo'])->name('editVideo'); // Placeholder for edit video
 
 
 Route::post('/process-topup', [VideoController::class, 'processTopUp']);

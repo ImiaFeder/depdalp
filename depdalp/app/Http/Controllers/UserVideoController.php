@@ -12,7 +12,7 @@ use App\Http\Requests\Updateuser_videoRequest;
 use Illuminate\Support\Facades\Auth;
 
 class UserVideoController extends Controller
-{   
+{
 
     public function userPage()
     {
@@ -26,23 +26,35 @@ class UserVideoController extends Controller
             return $userVideo->video; // Accessing the related 'video' for each user_video
         });
 
-        return view('userPage', compact('user', 'videos')); 
+        return view('userPage', compact('user', 'videos'));
     }
     /**
      * Display a listing of the resource.
      */
     public function index()
-    {   
+    {
         // Ambil video yang tidak memiliki status pending
         $featuredVideos = \App\Models\Video::where('pending', false)
-                            ->inRandomOrder()
-                            ->take(9)
-                            ->get();
-    
+            ->inRandomOrder()
+            ->take(9)
+            ->get();
+
         // Return view dengan data video
         return view('main', compact('featuredVideos'));
     }
-    
+
+    public function makeCreator($id)
+    {
+        // Temukan user berdasarkan ID
+        $user = User::findOrFail($id);
+
+        // Update isCreator menjadi 1
+        $user->isCreator = 1;
+        $user->save();
+
+        // Redirect dengan pesan sukses
+        return redirect()->route('admin.index')->with('success', 'User updated to Creator successfully.');
+    }
     /**
      * Show the form for creating a new resource.
      */
