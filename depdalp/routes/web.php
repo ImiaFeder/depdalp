@@ -70,6 +70,7 @@ Route::get('/search', [VideoController::class, 'search'])->name('video.search');
 Route::middleware('auth')->get('/profile', [UserProfileController::class, 'show'])->name('profile');
 Route::middleware('auth')->patch('/profile/update-background', [UserProfileController::class, 'update_background'])->name('profile.update_background');
 Route::middleware('auth')->patch('/profile/description', [UserProfileController::class, 'update_description'])->name('profile.update_description');
+Route::middleware('auth')->patch('/profile/update-name', [UserProfileController::class, 'update_name'])->name('profile.update_name');
 Route::middleware('auth')->get('/profile/owned_video', [UserProfileController::class, 'owned_video'])->name('profile.owned_video');
 
 

@@ -11,21 +11,34 @@ use App\Models\user_video;
 class UserProfileController extends Controller
 {
     public function show()
-{
-    // Get the currently authenticated user
-    $user = Auth::user();
+    {
+        // Get the currently authenticated user
+        $user = Auth::user();
 
-    // Ambil video yang dimiliki oleh pengguna
-    $userVideos = user_video::where('user_id', $user->id)->get();
+        // Ambil video yang dimiliki oleh pengguna
+        $userVideos = user_video::where('user_id', $user->id)->get();
 
-    // Mengambil video yang terkait
-    $videos = $userVideos->map(function ($userVideo) {
-        return $userVideo->video;
-    });
+        // Mengambil video yang terkait
+        $videos = $userVideos->map(function ($userVideo) {
+            return $userVideo->video;
+        });
 
-    // Kirim data ke view
-    return view('profile', compact('user', 'videos'));
-}
+        // Kirim data ke view
+        return view('profile', compact('user', 'videos'));
+    }
+
+    public function update_name(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        $user = auth()->user();
+        $user->name = $request->input('name');
+        $user->save();
+
+        return redirect()->back()->with('success', 'Name updated successfully.');
+    }
 
     public function update_background(Request $request)
     {

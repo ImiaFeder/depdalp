@@ -30,8 +30,22 @@
             @endif
         </div>
 
-        <div class="space-y-4 mt-12">
-            <p><strong class="text-3xl">{{ $user->name }}</strong></p>
+        <div class="space-y-4 mt-12 flex items-center">
+            <!-- User Name -->
+            <p class="text-3xl font-bold">{{ $user->name }}</p>
+
+            <!-- Edit Button with Pencil Icon -->
+            <button id="editNameButton" class="ml-4 text-gray-500 hover:text-gray-700 focus:outline-none flex items-center">
+                <!-- Pencil Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                    stroke="currentColor" class="w-4 h-4">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M16.862 3.487a2.25 2.25 0 113.182 3.182L7.44 19.273a4.5 4.5 0 01-1.691 1.064l-3.862 1.162 1.162-3.862a4.5 4.5 0 011.064-1.691L16.862 3.487z" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="space-y-4 mt-6">
             <p><strong class="text-2xl">{{ $user->email }}</strong></p>
         </div>
 
@@ -50,6 +64,34 @@
                     class="text-white bg-red-600 mt-4 px-4 py-2 rounded-md absolute bottom-4 right-4">Add
                     Description</button>
             @endif
+        </div>
+
+        <!-- Modal for updating user name -->
+        <div id="nameModal" class="fixed inset-0 flex justify-center items-center bg-gray-800 bg-opacity-50 hidden z-20">
+            <div class="bg-white rounded-lg p-6 w-96 z-30">
+                <h3 class="text-lg font-medium mb-4">Update User Name</h3>
+                <form action="{{ route('profile.update_name') }}" method="POST">
+                    @csrf
+                    @method('PATCH')
+                    <div class="space-y-4">
+                        <label for="name" class="block text-lg font-medium">New Name</label>
+                        <input type="text" name="name" id="name"
+                            class="w-full p-2 border border-gray-300 rounded-md" value="{{ $user->name }}" required>
+
+                        @if ($errors->has('name'))
+                            <div class="mt-2 text-red-600 text-sm">
+                                {{ $errors->first('name') }}
+                            </div>
+                        @endif
+                    </div>
+
+                    <div class="mt-4 flex justify-end">
+                        <button type="button" id="closeNameModalBtn"
+                            class="px-4 py-2 bg-gray-500 text-white rounded-md mr-2">Cancel</button>
+                        <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-md">Save Name</button>
+                    </div>
+                </form>
+            </div>
         </div>
 
         <!-- Modal (Dialog Box) for updating description -->
@@ -123,7 +165,8 @@
                     <div class="video-card bg-white shadow-lg rounded-lg overflow-hidden relative group">
                         <!-- Video Thumbnail -->
                         <div class="w-full h-48 bg-gray-300 flex justify-center items-center">
-                            <img src="/storage/thumbnail1.png" alt="{{ $video->title }}" class="w-full h-full object-cover"
+                            <img src="/storage/thumbnail1.png" alt="{{ $video->title }}"
+                                class="w-full h-full object-cover"
                                 onerror="this.onerror=null;this.src='https://via.placeholder.com/300x200?text=No+Image';">
                         </div>
 
@@ -135,7 +178,8 @@
                         <!-- Hover Effects for Interactivity -->
                         <div
                             class="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <a href="{{ url('/video/' . $video->id) }}" class="text-white font-bold text-xl">Watch Now</a>
+                            <a href="{{ url('/video/' . $video->id) }}" class="text-white font-bold text-xl">Watch
+                                Now</a>
                         </div>
                     </div>
                 @endforeach
@@ -144,6 +188,28 @@
     </div>
 
     <script>
+        // Get the modal and buttons for updating name
+        const nameModal = document.getElementById('nameModal');
+        const editNameButton = document.getElementById('editNameButton');
+        const closeNameModalBtn = document.getElementById('closeNameModalBtn');
+
+        // Open modal for updating user name
+        editNameButton.addEventListener('click', function() {
+            nameModal.classList.remove('hidden');
+        });
+
+        // Close name modal when clicking "Cancel"
+        closeNameModalBtn.addEventListener('click', function() {
+            nameModal.classList.add('hidden');
+        });
+
+        // Close name modal when clicking outside the modal content
+        window.addEventListener('click', function(event) {
+            if (event.target === nameModal) {
+                nameModal.classList.add('hidden');
+            }
+        });
+
         // Get the modal and buttons
         const modal = document.getElementById('modal');
         const openModalBtn = document.getElementById('openModalBtn');
