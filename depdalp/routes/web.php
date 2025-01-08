@@ -61,6 +61,11 @@ Route::get('/genre/{gr}', function ($gr) {
 });
 
 
+
+Route::get('/station', [VideoController::class, 'station'])->name('station');
+Route::get('/edit-video/{id}', [VideoController::class, 'editVideo'])->name('editVideo'); // Placeholder for edit video
+
+
 Route::post('/process-topup', [VideoController::class, 'processTopUp']);
 
 Route::get('/upload-video', [VideoController::class, 'create'])->name('video.create');
