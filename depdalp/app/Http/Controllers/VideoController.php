@@ -143,14 +143,13 @@ class VideoController extends Controller
      */
     public function station()
     {
-        // Dummy data for user's videos
-        $videos = [
-            (object) ['id' => 1, 'title' => 'Sample Video 1', 'purchases' => 10, 'coins' => 100],
-            (object) ['id' => 2, 'title' => 'Sample Video 2', 'purchases' => 15, 'coins' => 150],
-            (object) ['id' => 3, 'title' => 'Sample Video 3', 'purchases' => 20, 'coins' => 200],
-        ];
+        // Ambil user ID dari pengguna yang sedang login
+        $userId = Auth::id();
 
-        // Return view with dummy data
+        // Ambil semua video yang diunggah oleh pengguna tersebut
+        $videos = Video::where('user_id', $userId)->get();
+
+        // Return view dengan data video
         return view('station', compact('videos'));
     }
     public function index()
