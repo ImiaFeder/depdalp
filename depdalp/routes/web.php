@@ -25,6 +25,8 @@ Route::middleware(['admin'])->group(function () {
 
     Route::patch('/admin/approve/{id}', [VideoController::class, 'approve'])->name('admin.approve');
     Route::delete('/admin/delete/{id}', [VideoController::class, 'destroy'])->name('admin.delete');
+    Route::patch('/make-creator/{id}', [UserVideoController::class, 'makeCreator'])->name('makeCreator');
+
 });
 Route::get('/adminPage', [VideoController::class, 'index'])->name('admin.index')->middleware('auth');
 

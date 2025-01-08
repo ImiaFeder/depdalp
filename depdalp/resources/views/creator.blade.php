@@ -41,7 +41,7 @@
     </div>
 
     <div class="mt-6">
-        <a href="" class="bg-yellow-500 text-white px-6 py-2 rounded-md hover:bg-yellow-400 transition duration-300 ease-in-out">Become a Creator</a>
+        <a href="https://wa.link/3qx249" class="bg-yellow-500 text-white px-6 py-2 rounded-md hover:bg-yellow-400 transition duration-300 ease-in-out">Become a Creator</a>
     </div>
 </div>
 @endsection

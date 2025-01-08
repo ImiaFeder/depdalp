@@ -152,9 +152,13 @@ class VideoController extends Controller
         // Ambil semua video dengan pending = 1
         $pendingVideos = video::where('pending', true)->get();
 
+        // Ambil semua pengguna kecuali admin
+        $users = User::where('isAdmin', false)->get();
+
         // Kirim data ke view
-        return view('adminpage', compact('pendingVideos'));
+        return view('adminpage', compact('pendingVideos', 'users'));
     }
+
 
 
     /**
