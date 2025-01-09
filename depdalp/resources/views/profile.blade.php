@@ -12,13 +12,10 @@
             @else
                 <div class="absolute inset-0 bg-gray-300 rounded-lg" style="height: 200px; z-index: 0;"></div>
             @endif
-
-            <!-- Button to open dialog for updating background image, placed at the bottom-right -->
             <button id="openModalBtn"
                 class="absolute top-40 right-0 text-white bg-red-600 px-4 py-2 rounded-md z-10">Update</button>
         </div>
 
-        <!-- Profile picture section -->
         <div class="flex items-center mb-6 relative z-10" style="margin-top: 100px; margin-left: 20px;">
             @if ($user->profile_picture)
                 <img src="{{ asset('storage/' . $user->profile_picture) }}" alt="Profile Picture"
@@ -28,6 +25,15 @@
                     <span class="text-2xl font-bold text-white">{{ substr($user->name, 0, 1) }}</span>
                 </div>
             @endif
+            <button id="editProfilePictureButton"
+                class="ml-2 mt-8 text-white hover:text-gray-200 focus:outline-none flex items-center relative left-[-10px]">
+                <!-- Pencil Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                    stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M16.862 3.487a2.25 2.25 0 113.182 3.182L7.44 19.273a4.5 4.5 0 01-1.691 1.064l-3.862 1.162 1.162-3.862a4.5 4.5 0 011.064-1.691L16.862 3.487z" />
+                </svg>
+            </button>
         </div>
 
         <div class="space-y-4 mt-12 flex items-center">
@@ -64,6 +70,35 @@
                     class="text-white bg-red-600 mt-4 px-4 py-2 rounded-md absolute bottom-4 right-4">Add
                     Description</button>
             @endif
+        </div>
+
+        <div id="profilePictureModal"
+            class="fixed inset-0 flex justify-center items-center bg-gray-800 bg-opacity-50 hidden z-20">
+            <div class="bg-white rounded-lg p-6 w-96 z-30">
+                <h3 class="text-lg font-medium mb-4">Update Profile Picture</h3>
+                <form action="{{ route('profile.update_profpic') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PATCH')
+                    <div class="space-y-4">
+                        <label for="profile_picture" class="block text-lg font-medium">Choose Image</label>
+                        <input type="file" name="profile_picture" id="profile_picture"
+                            class="block w-full text-sm text-gray-600 py-2 px-4 border border-gray-300 rounded-md"
+                            accept="image/*">
+                    </div>
+
+                    @if ($errors->has('profile_picture'))
+                        <div class="mt-2 text-red-600 text-sm">
+                            {{ $errors->first('profile_picture') }}
+                        </div>
+                    @endif
+
+                    <div class="mt-4 flex justify-end">
+                        <button type="button" id="closeProfilePictureModalBtn"
+                            class="px-4 py-2 bg-gray-500 text-white rounded-md mr-2">Cancel</button>
+                        <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-md">Upload</button>
+                    </div>
+                </form>
+            </div>
         </div>
 
         <!-- Modal for updating user name -->
@@ -116,7 +151,8 @@
                     <div class="mt-4 flex justify-end">
                         <button type="button" id="closeDescriptionModalBtn"
                             class="px-4 py-2 bg-gray-500 text-white rounded-md mr-2">Cancel</button>
-                        <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-md">Save Description</button>
+                        <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-md">Save
+                            Description</button>
                     </div>
                 </form>
             </div>
@@ -263,6 +299,27 @@
         window.addEventListener('click', function(event) {
             if (event.target === descriptionModal) {
                 descriptionModal.classList.add('hidden');
+            }
+        });
+
+        const profilePictureModal = document.getElementById('profilePictureModal');
+        const editProfilePictureButton = document.getElementById('editProfilePictureButton');
+        const closeProfilePictureModalBtn = document.getElementById('closeProfilePictureModalBtn');
+
+        // Open modal for updating profile picture
+        editProfilePictureButton.addEventListener('click', function() {
+            profilePictureModal.classList.remove('hidden');
+        });
+
+        // Close profile picture modal when clicking "Cancel"
+        closeProfilePictureModalBtn.addEventListener('click', function() {
+            profilePictureModal.classList.add('hidden');
+        });
+
+        // Close profile picture modal when clicking outside the modal content
+        window.addEventListener('click', function(event) {
+            if (event.target === profilePictureModal) {
+                profilePictureModal.classList.add('hidden');
             }
         });
     </script>
