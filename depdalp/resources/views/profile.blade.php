@@ -28,6 +28,15 @@
                     <span class="text-2xl font-bold text-white">{{ substr($user->name, 0, 1) }}</span>
                 </div>
             @endif
+            <button id="editProfilePictureButton"
+                class="ml-2 mt-8 text-white hover:text-gray-200 focus:outline-none flex items-center relative left-[-10px]">
+                <!-- Pencil Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                    stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M16.862 3.487a2.25 2.25 0 113.182 3.182L7.44 19.273a4.5 4.5 0 01-1.691 1.064l-3.862 1.162 1.162-3.862a4.5 4.5 0 011.064-1.691L16.862 3.487z" />
+                </svg>
+            </button>
         </div>
 
         <div class="space-y-4 mt-12 flex items-center">

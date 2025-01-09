@@ -75,6 +75,7 @@ Route::post('/purchase-video', [VideoController::class, 'purchaseVideo'])->middl
 Route::get('/search', [VideoController::class, 'search'])->name('video.search');
 
 Route::middleware('auth')->get('/profile', [UserProfileController::class, 'show'])->name('profile');
+Route::middleware('auth')->patch('/profile/update-profpic', [UserProfileController::class, 'update_profpic'])->name('profile.update_profpic');
 Route::middleware('auth')->patch('/profile/update-background', [UserProfileController::class, 'update_background'])->name('profile.update_background');
 Route::middleware('auth')->patch('/profile/description', [UserProfileController::class, 'update_description'])->name('profile.update_description');
 Route::middleware('auth')->patch('/profile/update-name', [UserProfileController::class, 'update_name'])->name('profile.update_name');

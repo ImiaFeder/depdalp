@@ -40,6 +40,27 @@ class UserProfileController extends Controller
         return redirect()->back()->with('success', 'Name updated successfully.');
     }
 
+    public function update_profpic(Request $request)
+    {
+        // Validate the uploaded file (optional)
+        $request->validate([
+            'profile_picture' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $user = Auth::user(); // Get the authenticated user
+
+        if ($request->hasFile('profile_picture')) {
+            $profilePicture= $request->file('profile_picture');
+            $path = $profilePicture->store('profile_pictures', 'public');
+
+            $user->profile_picture = $path;
+            $user->save();
+        }
+
+        // Redirect back with success message
+        return back()->with('success', 'Profile picture updated successfully!');
+    }
+
     public function update_background(Request $request)
     {
         // Validate the uploaded file (optional)
