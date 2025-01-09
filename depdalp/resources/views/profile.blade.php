@@ -75,6 +75,35 @@
             @endif
         </div>
 
+        <div id="profilePictureModal"
+        class="fixed inset-0 flex justify-center items-center bg-gray-800 bg-opacity-50 hidden z-20">
+        <div class="bg-white rounded-lg p-6 w-96 z-30">
+            <h3 class="text-lg font-medium mb-4">Update Profile Picture</h3>
+            <form action="{{ route('profile.update_profpic') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PATCH')
+                <div class="space-y-4">
+                    <label for="profile_picture" class="block text-lg font-medium">Choose Image</label>
+                    <input type="file" name="profile_picture" id="profile_picture"
+                        class="block w-full text-sm text-gray-600 py-2 px-4 border border-gray-300 rounded-md"
+                        accept="image/*">
+                </div>
+
+                @if ($errors->has('profile_picture'))
+                    <div class="mt-2 text-red-600 text-sm">
+                        {{ $errors->first('profile_picture') }}
+                    </div>
+                @endif
+
+                <div class="mt-4 flex justify-end">
+                    <button type="button" id="closeProfilePictureModalBtn"
+                        class="px-4 py-2 bg-gray-500 text-white rounded-md mr-2">Cancel</button>
+                    <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-md">Upload</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
         <!-- Modal for updating user name -->
         <div id="nameModal" class="fixed inset-0 flex justify-center items-center bg-gray-800 bg-opacity-50 hidden z-20">
             <div class="bg-white rounded-lg p-6 w-96 z-30">
@@ -272,6 +301,27 @@
         window.addEventListener('click', function(event) {
             if (event.target === descriptionModal) {
                 descriptionModal.classList.add('hidden');
+            }
+        });
+
+        const profilePictureModal = document.getElementById('profilePictureModal');
+        const editProfilePictureButton = document.getElementById('editProfilePictureButton');
+        const closeProfilePictureModalBtn = document.getElementById('closeProfilePictureModalBtn');
+
+        // Open modal for updating profile picture
+        editProfilePictureButton.addEventListener('click', function() {
+            profilePictureModal.classList.remove('hidden');
+        });
+
+        // Close profile picture modal when clicking "Cancel"
+        closeProfilePictureModalBtn.addEventListener('click', function() {
+            profilePictureModal.classList.add('hidden');
+        });
+
+        // Close profile picture modal when clicking outside the modal content
+        window.addEventListener('click', function(event) {
+            if (event.target === profilePictureModal) {
+                profilePictureModal.classList.add('hidden');
             }
         });
     </script>
