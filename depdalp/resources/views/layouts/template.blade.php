@@ -7,16 +7,17 @@
     <title>@yield('title')</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const userDropdownButton = document.getElementById('userDropdownButton');
             const userDropdownMenu = document.getElementById('userDropdownMenu');
 
-            userDropdownButton?.addEventListener('click', function () {
+            userDropdownButton?.addEventListener('click', function() {
                 userDropdownMenu.classList.toggle('hidden');
             });
 
-            document.addEventListener('click', function (event) {
-                if (!userDropdownButton.contains(event.target) && !userDropdownMenu.contains(event.target)) {
+            document.addEventListener('click', function(event) {
+                if (!userDropdownButton.contains(event.target) && !userDropdownMenu.contains(event
+                        .target)) {
                     userDropdownMenu.classList.add('hidden');
                 }
             });
@@ -42,17 +43,20 @@
                 {{-- <li><a href="{{ url('/userPage') }}"
                         class="hover:text-yellow-400 transition duration-300 ease-in-out">User</a></li> --}}
                 @auth
-                    @if(Auth::user()->isAdmin)
+                    @if (Auth::user()->isAdmin)
                         <li><a href="{{ url('/adminPage') }}"
                                 class="hover:text-yellow-400 transition duration-300 ease-in-out">Admin</a></li>
                     @endif
-                    @if(Auth::user()->isCreator)
+                    @if (Auth::user()->isCreator)
                         <li><a href="{{ url('/upload-video') }}"
-                                class="hover:text-yellow-400 transition duration-300 ease-in-out">Upload</a></li>
+                                class="hover:text-yellow-400 transition duration-300 ease-in-out">Upload</a>
+                        </li>
                         <li><a href="{{ url('/station') }}"
                                 class="hover:text-yellow-400 transition duration-300 ease-in-out">Creator Station</a>
                         </li>
-
+                        <li><a href="{{ url('/deposit') }}"
+                                class="hover:text-yellow-400 transition duration-300 ease-in-out">Deposit</a>
+                        </li>
                     @else
                         <li><a href="{{ url('/join-creator') }}"
                                 class="hover:text-yellow-400 transition duration-300 ease-in-out">Join Creators</a></li>
@@ -92,7 +96,7 @@
                         <!-- Tampilkan nama pengguna dengan sedikit margin ke kanan -->
                         <span class="mr-2">{{ Auth::user()->name }}</span>
                         <!-- Tampilkan gambar profil jika ada -->
-                        @if(Auth::user()->profile_picture)
+                        @if (Auth::user()->profile_picture)
                             <img src="{{ asset('storage/' . Auth::user()->profile_picture) }}" alt="Profile Picture"
                                 class="w-8 h-8 rounded-full ml-2">
                         @else
@@ -193,7 +197,8 @@
 
                     <!-- Credit Card Form -->
                     <form id="creditCardForm" class="hidden flex flex-col items-start mb-6">
-                        <label for="cardNumber" class="block text-left text-gray-700 font-semibold mb-2">Card Number</label>
+                        <label for="cardNumber" class="block text-left text-gray-700 font-semibold mb-2">Card
+                            Number</label>
                         <input id="cardNumber" type="text"
                             class="w-full border border-gray-300 rounded-lg py-2 px-4 mb-4 focus:outline-none focus:border-orange-500"
                             placeholder="1234 5678 9012 3456">
@@ -230,8 +235,6 @@
             </div>
 
             <script>
-
-
                 document.addEventListener('DOMContentLoaded', () => {
                     const topupPopup = document.getElementById('topupPopup');
                     const topupOptions = document.querySelectorAll('.topupOption');
@@ -334,18 +337,18 @@
 
                         // Submit top-up details
                         fetch('/process-topup', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                            },
-                            body: JSON.stringify({
-                                amount: selectedAmount,
-                                cardNumber: cardNumber,
-                                expiryDate: expiryDate,
-                                cvv: cvv
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                },
+                                body: JSON.stringify({
+                                    amount: selectedAmount,
+                                    cardNumber: cardNumber,
+                                    expiryDate: expiryDate,
+                                    cvv: cvv
+                                })
                             })
-                        })
                             .then(response => response.json())
                             .then(data => {
                                 if (data.success) {

@@ -7,7 +7,7 @@ use App\Models\genre;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\UserVideoController;
 use App\Http\Controllers\UserProfileController;
-
+use App\Http\Controllers\DepositController;
 
 Route::get('/home', [App\Http\Controllers\UserVideoController::class, 'index']);
 Route::get('/', function () {
@@ -16,6 +16,10 @@ Route::get('/', function () {
 
 Route::get('/join-creator', function () {
     return view('creator');
+})->middleware('auth');
+
+Route::get('/deposit', function () {
+    return view('deposit');
 })->middleware('auth');
 
 
@@ -81,5 +85,7 @@ Route::middleware('auth')->patch('/profile/description', [UserProfileController:
 Route::middleware('auth')->patch('/profile/update-name', [UserProfileController::class, 'update_name'])->name('profile.update_name');
 Route::middleware('auth')->get('/profile/owned_video', [UserProfileController::class, 'owned_video'])->name('profile.owned_video');
 
+Route::get('/deposit-token', [DepositController::class, 'showForm'])->name('deposit.form');
+Route::post('/deposit-token', [DepositController::class, 'submitDeposit'])->name('deposit.submit');
 
 Auth::routes();
