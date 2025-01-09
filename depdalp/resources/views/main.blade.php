@@ -59,7 +59,7 @@
             @foreach ($featuredVideos as $video)
             <a href="/video/{{ $video->id }}" class="bg-white border border-gray-200 rounded-lg shadow-lg hover:shadow-xl transition duration-300">
                 <div class="relative">
-                    <img src="{{ asset('storage/thumbnail1.png') }}" alt="{{ $video->title }}" class="w-full h-48 object-cover rounded-t-lg">
+                    <img src="{{ asset('storage/'.$video->thumbnail) }}" alt="{{ $video->title }}" class="w-full h-48 object-cover rounded-t-lg">
                     <div class="absolute top-2 left-2 bg-black bg-opacity-50 text-white text-xs font-bold px-2 py-1 rounded">
                         <div class="flex items-center space-x-1">
                             <div class="w-6 h-6 bg-orange-500 text-white rounded-full flex items-center justify-center">

@@ -82,36 +82,36 @@ class VideoController extends Controller
         $user = Auth::user();
         $videoId = $request->input('video_id');
         $video = Video::find($videoId);
-
-        // Validate if the video exists
+    
         if (!$video) {
             return response()->json(['error' => 'Video not found.'], 404);
         }
-
-        // Check if user already owns the video
+    
         $ownsVideo = user_video::where('user_id', $user->id)->where('video_id', $video->id)->exists();
         if ($ownsVideo) {
             return response()->json(['error' => 'You already own this video.'], 400);
         }
-
-        // Check if the user has enough tokens
+    
         if ($user->token < $video->price) {
             return response()->json(['error' => 'Insufficient balance.'], 400);
         }
-
-        // Deduct the price from user's balance
+    
         User::where('id', $user->id)->update([
             'token' => $user->token - $video->price,
         ]);
-
-        // Create a new UserVideo record
+    
         user_video::create([
             'user_id' => $user->id,
             'video_id' => $video->id,
         ]);
-
+    
+        // Tambahkan logika untuk menambah buyed count
+        $video->buyed = $video->buyed+1;
+        $video->save();
+    
         return response()->json(['success' => 'Video purchased successfully.'], 200);
     }
+
 
     public function processTopUp(Request $request)
     {
@@ -191,45 +191,53 @@ class VideoController extends Controller
 
     // Proses penyimpanan video
     public function store(Request $request)
-    {
-        // Validasi input
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'price' => 'required|numeric|min:0',
-            'genre_id' => 'required|exists:genres,id',
-            'video' => 'required|mimetypes:video/mp4|max:102400',
+{
+    // Validasi input
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'description' => 'nullable|string',
+        'price' => 'required|numeric|min:0',
+        'genre_id' => 'required|exists:genres,id',
+        'video' => 'required|mimetypes:video/mp4|max:102400',
+        'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
+
+    if ($request->hasFile('video') && $request->hasFile('thumbnail')) {
+        // Unggah file video
+        $videoFilename = $request->file('video')->getClientOriginalName();
+        $videoDestination = 'videos';
+        $videoPath = $request->file('video')->storeAs($videoDestination, $videoFilename, 'public');
+
+        // Unggah file thumbnail
+        $thumbnailFilename = $request->file('thumbnail')->getClientOriginalName();
+        $thumbnailDestination = 'thumbnails';
+        $thumbnailPath = $request->file('thumbnail')->storeAs($thumbnailDestination, $thumbnailFilename, 'public');
+
+        // Buat video baru
+        $video = Video::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'price' => $request->price,
+            'path' => $videoPath,
+            'thumbnail' => $thumbnailPath,
+            'pending' => 1,
+            'user_id' => Auth::user()->id
         ]);
 
-        if ($request->hasFile('video')) {
-            // Unggah file video
-            $filename = $request->file('video')->getClientOriginalName();
-            $destinationPath = 'videos';
-            $filePath = $request->file('video')->storeAs($destinationPath, $filename, 'public');
+        // Buat hubungan dengan genre
+        \App\Models\genre_video::create([
+            'video_id' => $video->id,
+            'genre_id' => $request->genre_id,
+        ]);
 
-            // Buat video baru
-            $video = Video::create([
-                'title' => $request->title,
-                'description' => $request->description,
-                'price' => $request->price,
-                'path' => $filePath,
-                'pending' => 1,
-                'user_id' => Auth::user()->id
-            ]);
-
-            // Buat hubungan dengan genre
-            \App\Models\genre_video::create([
-                'video_id' => $video->id,
-                'genre_id' => $request->genre_id,
-            ]);
-
-            session()->flash('success', 'Video uploaded and associated with genre successfully!');
-            return redirect()->back();
-        }
-
-        session()->flash('error', 'No video file found in the request.');
+        session()->flash('success', 'Video and thumbnail uploaded successfully!');
         return redirect()->back();
     }
+
+    session()->flash('error', 'Video or thumbnail file not found in the request.');
+    return redirect()->back();
+}
+
 
 
 
@@ -242,17 +250,25 @@ class VideoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(video $video)
+    public function edit($id)
     {
-        //
+        $video = Video::findOrFail($id);
+        return view('edit-video', compact('video'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdatevideoRequest $request, video $video)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+        ]);
+
+        $video = Video::findOrFail($id);
+        $video->title = $request->input('title');
+        $video->description = $request->input('description');
+        $video->save();
+
+        return redirect()->route('edit.video', $id)->with('success', 'Video updated successfully.');
     }
 
     public function approve($id)

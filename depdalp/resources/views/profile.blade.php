@@ -165,7 +165,7 @@
                     <div class="video-card bg-white shadow-lg rounded-lg overflow-hidden relative group">
                         <!-- Video Thumbnail -->
                         <div class="w-full h-48 bg-gray-300 flex justify-center items-center">
-                            <img src="/storage/thumbnail1.png" alt="{{ $video->title }}"
+                            <img src="/storage/{{$video->thumbnail}}" alt="{{ $video->title }}"
                                 class="w-full h-full object-cover"
                                 onerror="this.onerror=null;this.src='https://via.placeholder.com/300x200?text=No+Image';">
                         </div>

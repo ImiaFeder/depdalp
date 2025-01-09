@@ -30,14 +30,14 @@
                                 class="w-12 h-12 object-cover rounded">
                         </td>
                         <td class="py-3 px-6">
-                            <a href="{{ route('editVideo', $video->id) }}" class="text-blue-500 hover:underline">
+                            <a href="{{ route('edit.video', $video->id) }}" class="text-blue-500 hover:underline">
                                 {{ $video->title }}
                             </a>
                         </td>
-                        <td class="py-3 px-6">{{ $video->purchases }}</td>
-                        <td class="py-3 px-6">{{ $video->coins }}</td>
+                        <td class="py-3 px-6">{{ $video->buyed }}</td>
+                        <td class="py-3 px-6">{{ $video->buyed * $video->price }}</td>
                         <td class="py-3 px-6">
-                            <a href="{{ route('editVideo', $video->id) }}"
+                            <a href="{{ route('edit.video', $video->id) }}"
                                 class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-700">Edit</a>
                         </td>
                     </tr>

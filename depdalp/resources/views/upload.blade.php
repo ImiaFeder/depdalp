@@ -67,6 +67,14 @@
             @enderror
         </div>
 
+        <div class="mb-4">
+            <label for="thumbnail" class="block text-gray-700 text-sm font-bold mb-2">Upload Thumbnail (Image, Max: 2MB):</label>
+            <input type="file" name="thumbnail" id="thumbnail" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border file:border-gray-300 file:text-gray-700 hover:file:bg-gray-100" required>
+            @error('thumbnail')
+                <p class="text-red-500 text-xs italic">{{ $message }}</p>
+            @enderror
+        </div>
+
         <div class="flex items-center justify-between">
             <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                 Upload Video

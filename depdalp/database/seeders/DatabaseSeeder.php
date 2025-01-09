@@ -65,7 +65,7 @@ class DatabaseSeeder extends Seeder
             ['title' => '3D Modelling for Virtual Reality (VR)', 'description' => 'Learn how to create 3D models for immersive VR environments.', 'price' => rand(3, 5), 'path' => 'path/to/video14'],
             ['title' => 'Street Photography Techniques', 'description' => 'Learn the art of street photography and capturing candid moments.', 'price' => rand(3, 5), 'path' => 'path/to/video15'],
             ['title' => 'The Audiophile’s Guide to Vinyl Records', 'description' => 'How to build a vinyl record collection and optimize sound quality.', 'price' => rand(3, 5), 'path' => 'path/to/video16'],
-            ['title' => 'HIIT Workouts for Maximum Fat Loss', 'description' => 'High-Intensity Interval Training to lose fat quickly and effectively.', 'price' => rand(3, 5), 'path' => 'path/to/video17'],
+            ['title' => 'HIIT Gym Workouts for Maximum Fat Loss', 'description' => 'High-Intensity Interval Training to lose fat quickly and effectively.', 'price' => rand(3, 5), 'path' => 'path/to/video17'],
             ['title' => 'Social Media Branding: Creating Your Identity', 'description' => 'Learn how to build a unique social media brand for your business.', 'price' => rand(3, 5), 'path' => 'path/to/video18'],
             ['title' => '3D Modelling for Animation Projects', 'description' => 'Create 3D models for animation projects with advanced techniques.', 'price' => rand(3, 5), 'path' => 'path/to/video19'],
             ['title' => 'Fitness and Gym Nutrition Guide', 'description' => 'Nutrition tips to help you get the best results from your gym routine.', 'price' => rand(3, 5), 'path' => 'path/to/video20'],
@@ -78,7 +78,9 @@ class DatabaseSeeder extends Seeder
         }
         unset($video); 
         
-       
+        foreach ($videos as &$video) {
+            $video['thumbnail'] = 'thumbnails/test.png';
+        }
 
         foreach ($videos as $video) {
             Video::create($video);
@@ -100,7 +102,9 @@ class DatabaseSeeder extends Seeder
             ]
             );
 
+        
 
+        
         
     }
 }

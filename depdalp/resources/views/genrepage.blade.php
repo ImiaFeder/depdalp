@@ -23,7 +23,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             @foreach($videos as $video)
                 <a href="{{ url('/video/' . $video->id) }}" class="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-2xl transition">
-                    <img src="/storage/thumbnail1.png" alt="{{ $video->title }}" class="w-full h-48 object-cover">
+                    <img src="{{ asset('storage/'.$video->thumbnail) }}" alt="{{ $video->title }}" class="w-full h-48 object-cover">
                     <div class="p-4">
                         <h2 class="text-xl font-semibold">{{ $video->title }}</h2>
                         <p class="text-gray-600">{{ $video->description }}</p>

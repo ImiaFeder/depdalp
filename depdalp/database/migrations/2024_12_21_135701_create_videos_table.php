@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
+            $table->string('thumbnail')->default((""));
             $table->integer('price'); // Harga video (integer)
+            $table->integer('buyed')->default(0);
             $table->string('path'); // Path video
             $table->boolean('pending')->default(false); // Pending status
             $table->unsignedBigInteger('user_id')->default(1); // User ID
