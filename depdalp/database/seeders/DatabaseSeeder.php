@@ -49,7 +49,7 @@ class DatabaseSeeder extends Seeder
         }
         
         $videos = [
-            ['title' => 'Introduction to 3D Modelling', 'description' => 'Learn the basics of 3D modelling techniques.', 'price' => rand(3, 5), 'path' => 'path/to/video1'],
+            ['title' => 'Introduction to 3D Modelling', 'description' => 'Learn the basics of 3D modelling techniques.', 'price' => rand(3, 5), 'path' => 'videos/videohujan.mp4','thumbnail'=>'thumbnails/contoh2.png'],
             ['title' => 'Advanced 3D Modelling Techniques', 'description' => 'Take your 3D modelling skills to the next level.', 'price' => rand(3, 5), 'path' => 'path/to/video2'],
             ['title' => '3D Modelling for Game Design', 'description' => 'Create 3D models for games with these advanced techniques.', 'price' => rand(3, 5), 'path' => 'path/to/video3'],
             ['title' => 'Product Photography for Beginners', 'description' => 'Learn how to shoot products with professional quality.', 'price' => rand(3, 5), 'path' => 'path/to/video4'],
@@ -71,16 +71,16 @@ class DatabaseSeeder extends Seeder
             ['title' => 'Fitness and Gym Nutrition Guide', 'description' => 'Nutrition tips to help you get the best results from your gym routine.', 'price' => rand(3, 5), 'path' => 'path/to/video20'],
         ];
         
-        foreach ($videos as &$video) {
-            if (stripos($video['title'], '3D Modelling') !== false) {
-                $video['path'] = 'videos/blender.mp4';
-            }
-        }
-        unset($video); 
+        // foreach ($videos as &$video) {
+        //     if (stripos($video['title'], '3D Modelling') !== false) {
+        //         $video['path'] = 'videos/blender.mp4';
+        //     }
+        // }
+        // unset($video); 
         
-        foreach ($videos as &$video) {
-            $video['thumbnail'] = 'thumbnails/test.png';
-        }
+        // foreach ($videos as &$video) {
+        //     $video['thumbnail'] = 'thumbnails/test.png';
+        // }
 
         foreach ($videos as $video) {
             Video::create($video);
