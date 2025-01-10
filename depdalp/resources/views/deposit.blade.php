@@ -1,36 +1,38 @@
 @extends('layouts.template')
 
 @section('content')
-<div class="container">
-    <h2 class="text-2xl font-bold mb-4">Deposit Tokens to Real Money</h2>
+<div class="container mx-auto max-w-lg p-6 bg-white shadow-md rounded-lg">
+    <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Deposit Tokens to Real Money</h2>
 
     <!-- Display success message -->
     @if(session('success'))
-        <div class="bg-green-500 text-white p-4 mb-4 rounded">
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6" role="alert">
             {{ session('success') }}
         </div>
     @endif
 
     <!-- Display error messages -->
     @if($errors->any())
-        <div class="bg-red-500 text-white p-4 mb-4 rounded">
-            @foreach ($errors->all() as $error)
-                <p>{{ $error }}</p>
-            @endforeach
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6" role="alert">
+            <ul class="list-disc pl-5">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
         </div>
     @endif
 
-    <form action="{{ route('deposit.submit') }}" method="POST">
+    <form action="{{ route('deposit.submit') }}" method="POST" class="space-y-4">
         @csrf
 
         <!-- Token Amount Input -->
-        <div class="mb-4">
-            <label for="token_amount" class="block text-gray-700">Amount of Tokens to Exchange</label>
+        <div>
+            <label for="token_amount" class="block text-sm font-medium text-gray-700">Amount of Tokens to Exchange</label>
             <input
                 type="number"
                 id="token_amount"
                 name="token_amount"
-                class="mt-2 p-2 border border-gray-300 rounded w-full"
+                class="mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 required
                 min="1"
                 placeholder="Enter the amount of tokens"
@@ -38,38 +40,38 @@
         </div>
 
         <!-- Bank Account Number Input -->
-        <div class="mb-4">
-            <label for="account_number" class="block text-gray-700">Bank Account Number</label>
+        <div>
+            <label for="account_number" class="block text-sm font-medium text-gray-700">Bank Account Number</label>
             <input
                 type="text"
                 id="account_number"
                 name="account_number"
-                class="mt-2 p-2 border border-gray-300 rounded w-full"
+                class="mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 required
                 placeholder="Enter your bank account number"
                 value="{{ old('account_number') }}">
         </div>
 
         <!-- Account Holder Name Input -->
-        <div class="mb-4">
-            <label for="account_name" class="block text-gray-700">Account Holder Name</label>
+        <div>
+            <label for="account_name" class="block text-sm font-medium text-gray-700">Account Holder Name</label>
             <input
                 type="text"
                 id="account_name"
                 name="account_name"
-                class="mt-2 p-2 border border-gray-300 rounded w-full"
+                class="mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 required
                 placeholder="Enter the account holder's name"
                 value="{{ old('account_name') }}">
         </div>
 
         <!-- Bank Selection -->
-        <div class="mb-4">
-            <label for="bank_name" class="block text-gray-700">Bank Name</label>
+        <div>
+            <label for="bank_name" class="block text-sm font-medium text-gray-700">Bank Name</label>
             <select
                 id="bank_name"
                 name="bank_name"
-                class="mt-2 p-2 border border-gray-300 rounded w-full"
+                class="mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 required>
                 <option value="BCA" {{ old('bank_name') == 'BCA' ? 'selected' : '' }}>BCA</option>
                 <option value="Mandiri" {{ old('bank_name') == 'Mandiri' ? 'selected' : '' }}>Mandiri</option>
@@ -80,10 +82,10 @@
         </div>
 
         <!-- Submit Button -->
-        <div class="flex justify-end">
+        <div class="pt-4">
             <button
                 type="submit"
-                class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">
+                class="w-full bg-blue-600 text-white font-medium py-2 px-4 rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
                 Submit Deposit Request
             </button>
         </div>
