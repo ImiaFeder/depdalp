@@ -34,13 +34,7 @@ class DatabaseSeeder extends Seeder
             'isAdmin' => false,
         ]);
 
-        User::create([
-            'name' => 'Budiman',
-            'email' => 'budi@example.com',
-            'password' => Hash::make('password'), // Ganti dengan password Anda
-            'isAdmin' => false,
-            'isCreator' => true,
-        ]);
+       
 
         $genres = ['3D Modelling', 'Photography', 'Audiophile', 'Gym', 'Social Media'];
 
@@ -81,10 +75,37 @@ class DatabaseSeeder extends Seeder
         // foreach ($videos as &$video) {
         //     $video['thumbnail'] = 'thumbnails/test.png';
         // }
+        $total_koin = 0;
 
+        // Mengisi atribut buyed secara random dan menghitung total
+        foreach ($videos as &$video) {
+            // Isi atribut 'buyed' dengan angka random dari 1 sampai 30
+            $video['buyed'] = rand(1, 30);
+        
+            // Hitung total untuk video ini
+            $temp = $video['buyed'] * $video['price'];
+        
+            // Tambahkan ke akumulasi total koin
+            $total_koin += $temp;
+        }
+
+        User::create([
+            'name' => 'Budiman',
+            'email' => 'budi@example.com',
+            'password' => Hash::make('password'), // Ganti dengan password Anda
+            'isAdmin' => false,
+            'isCreator' => true,
+            'token'=> $total_koin
+        ]);
+        
+        
+        // Tambahkan total_koin ke array global (opsional)
         foreach ($videos as $video) {
             Video::create($video);
         }
+        unset($video);
+
+
 
         user_video::create([
             'user_id' => 1,

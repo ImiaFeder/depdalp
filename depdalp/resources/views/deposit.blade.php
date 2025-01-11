@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container mx-auto max-w-lg p-6 bg-white shadow-md rounded-lg">
-    <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Deposit Tokens to Real Money</h2>
+    <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Exchange Token</h2>
 
     <!-- Display success message -->
     @if(session('success'))
@@ -34,9 +34,10 @@
                 name="token_amount"
                 class="mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 required
-                min="1"
+                min="100"
                 placeholder="Enter the amount of tokens"
                 value="{{ old('token_amount') }}">
+            <div id="idr_details" class="text-sm text-gray-500 mt-2"></div>
         </div>
 
         <!-- Bank Account Number Input -->
@@ -91,4 +92,32 @@
         </div>
     </form>
 </div>
+
+<script>
+    document.getElementById('token_amount').addEventListener('input', function () {
+        const tokenAmount = this.value;
+
+        if (tokenAmount >= 100) {
+            fetch('{{ route('calculate.idr') }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({ token_amount: tokenAmount })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('idr_details').innerHTML = `
+                    <p>Gross Amount: <strong>IDR ${data.gross_amount}</strong></p>
+                    <p>Application Fee (10%): <strong>IDR ${data.app_fee}</strong></p>
+                    <p>Net Amount: <strong>IDR ${data.net_amount}</strong></p>
+                `;
+            })
+            .catch(error => console.error('Error:', error));
+        } else {
+            document.getElementById('idr_details').textContent = 'Minimum amount is 100 tokens.';
+        }
+    });
+</script>
 @endsection

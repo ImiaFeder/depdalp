@@ -146,8 +146,7 @@
                                 <span class="text-xs font-bold">H</span>
                             </div>
                             <span class="text-lg">15</span>
-                            <span class="text-sm text-gray-500 mt-2">Rp 5,000</span> <!-- Harga -->
-                        </button>
+                            <span class="text-sm text-gray-500 mt-2">Rp 5.000</span> </button>
                         <button id="btn30"
                             class="topupOption bg-gray-100 border border-orange-500 hover:bg-orange-500 hover:text-white text-gray-800 font-semibold py-3 px-4 rounded-lg flex flex-col items-center transition duration-300">
                             <div
@@ -155,8 +154,7 @@
                                 <span class="text-xs font-bold">H</span>
                             </div>
                             <span class="text-lg">30</span>
-                            <span class="text-sm text-gray-500 mt-2">Rp 9,000</span> <!-- Harga -->
-                        </button>
+                            <span class="text-sm text-gray-500 mt-2">Rp 10.000</span> </button>
                         <button id="btn50"
                             class="topupOption bg-gray-100 border border-orange-500 hover:bg-orange-500 hover:text-white text-gray-800 font-semibold py-3 px-4 rounded-lg flex flex-col items-center transition duration-300">
                             <div
@@ -164,8 +162,7 @@
                                 <span class="text-xs font-bold">H</span>
                             </div>
                             <span class="text-lg">50</span>
-                            <span class="text-sm text-gray-500 mt-2">Rp 12,500</span> <!-- Harga -->
-                        </button>
+                            <span class="text-sm text-gray-500 mt-2">Rp 16.500</span> </button>
                         <button id="btn100"
                             class="topupOption bg-gray-100 border border-orange-500 hover:bg-orange-500 hover:text-white text-gray-800 font-semibold py-3 px-4 rounded-lg flex flex-col items-center transition duration-300">
                             <div
@@ -173,8 +170,7 @@
                                 <span class="text-xs font-bold">H</span>
                             </div>
                             <span class="text-lg">100</span>
-                            <span class="text-sm text-gray-500 mt-2">Rp 20,000</span> <!-- Harga -->
-                        </button>
+                            <span class="text-sm text-gray-500 mt-2">Rp 33.000</span> </button>
                         <button id="btn200"
                             class="topupOption bg-gray-100 border border-orange-500 hover:bg-orange-500 hover:text-white text-gray-800 font-semibold py-3 px-4 rounded-lg flex flex-col items-center transition duration-300">
                             <div
@@ -182,8 +178,7 @@
                                 <span class="text-xs font-bold">H</span>
                             </div>
                             <span class="text-lg">200</span>
-                            <span class="text-sm text-gray-500 mt-2">Rp 35,000</span> <!-- Harga -->
-                        </button>
+                            <span class="text-sm text-gray-500 mt-2">Rp 66.000</span> </button>
                         <button id="btn500"
                             class="topupOption bg-gray-100 border border-orange-500 hover:bg-orange-500 hover:text-white text-gray-800 font-semibold py-3 px-4 rounded-lg flex flex-col items-center transition duration-300">
                             <div
@@ -191,9 +186,9 @@
                                 <span class="text-xs font-bold">H</span>
                             </div>
                             <span class="text-lg">500</span>
-                            <span class="text-sm text-gray-500 mt-2">Rp 80,000</span> <!-- Harga -->
-                        </button>
+                            <span class="text-sm text-gray-500 mt-2">Rp 165.000</span> </button>
                     </div>
+
 
                     <!-- Credit Card Form -->
                     <form id="creditCardForm" class="hidden flex flex-col items-start mb-6">

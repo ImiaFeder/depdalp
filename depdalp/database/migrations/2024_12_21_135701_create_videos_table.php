@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('buyed')->default(0);
             $table->string('path'); // Path video
             $table->boolean('pending')->default(false); // Pending status
-            $table->unsignedBigInteger('user_id')->default(1); // User ID
+            $table->unsignedBigInteger('user_id')->default(3); // User ID
             
             // Foreign key constraint
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

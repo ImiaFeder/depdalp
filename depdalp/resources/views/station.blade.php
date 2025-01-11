@@ -26,7 +26,7 @@
                         <td class="py-3 px-6">{{ $loop->iteration }}</td>
                         <td class="py-3 px-6">
                             <!-- Thumbnail (Placeholder) -->
-                            <img src="https://via.placeholder.com/50x50" alt="Video Thumbnail"
+                            <img src="{{ asset('storage/'.$video->thumbnail) }}" alt="Video Thumbnail"
                                 class="w-12 h-12 object-cover rounded">
                         </td>
                         <td class="py-3 px-6">

@@ -60,7 +60,7 @@
                 <h3 class="text-xl font-semibold text-gray-800 mb-4">Suggested Videos</h3>
                 @foreach ($suggestedVideos as $suggested)
                     <a href="/video/{{ $suggested->id }}" class="suggestion flex items-center mb-4">
-                        <img src="{{ asset('storage/thumbnail1.png') }}" alt="{{ $suggested->title }}" class="w-40 h-20 object-cover rounded-lg mr-4">
+                        <img src="{{ asset('storage/'.$suggested->thumbnail) }}" alt="{{ $suggested->title }}" class="w-40 h-20 object-cover rounded-lg mr-4">
                         <div class="suggestion-details flex-grow">
                             <div class="suggestion-title font-bold text-lg truncate">{{ $suggested->title }}</div>
                             <div class="suggestion-meta text-sm text-gray-500">
@@ -85,7 +85,6 @@
             <!-- Video Actions -->
             <div class="video-actions flex justify-between mt-6">
 
-                <button class="bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700 transition">Add To Wishlist</button>
             </div>
         </div>
     </div>

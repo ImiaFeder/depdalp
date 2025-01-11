@@ -64,6 +64,7 @@ Route::get('/genre/{gr}', function ($gr) {
     return view('genrepage', compact('genre', 'videos'));
 });
 
+Route::post('/calculate-idr', [DepositController::class, 'calculateIdr'])->name('calculate.idr');
 
 
 Route::get('/station', [VideoController::class, 'station'])->name('station');
