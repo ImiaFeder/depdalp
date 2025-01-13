@@ -104,6 +104,13 @@ class VideoController extends Controller
             'user_id' => $user->id,
             'video_id' => $video->id,
         ]);
+
+        $uploader = User::find($video->user_id);
+        if ($uploader) {
+            $uploader->update([
+                'token' => $uploader->token + $video->price,
+            ]);
+        }
     
         // Tambahkan logika untuk menambah buyed count
         $video->buyed = $video->buyed+1;
