@@ -78,7 +78,7 @@ class DatabaseSeeder extends Seeder
         $total_koin = 0;
 
         // Mengisi atribut buyed secara random dan menghitung total
-        foreach ($videos as &$video) {
+        foreach ($videos as $video) {
             // Isi atribut 'buyed' dengan angka random dari 1 sampai 30
             $video['buyed'] = rand(1, 30);
         
@@ -107,15 +107,13 @@ class DatabaseSeeder extends Seeder
 
 
 
-        user_video::create([
-            'user_id' => 1,
-            'video_id' => 1
-        ]);
-
-        user_video::create([
-            'user_id' => 1,
-            'video_id' => 2
-        ]);
+        for ($video_id = 1; $video_id <= 20; $video_id++) {
+            user_video::create([
+                'user_id' => 3,
+                'video_id' => $video_id
+            ]);
+        }
+        
 
         $this-> call(
             [

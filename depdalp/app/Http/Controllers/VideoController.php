@@ -230,6 +230,11 @@ class VideoController extends Controller
             'genre_id' => $request->genre_id,
         ]);
 
+        user_video::create([
+            'user_id' => Auth::user()->id,
+            'video_id' => $video->id
+        ]);
+
         session()->flash('success', 'Video and thumbnail uploaded successfully!');
         return redirect()->back();
     }
